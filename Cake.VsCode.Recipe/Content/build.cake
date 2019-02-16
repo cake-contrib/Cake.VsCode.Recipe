@@ -164,6 +164,7 @@ BuildParameters.Tasks.PackageExtensionTask = Task("Package-Extension")
     .IsDependentOn("Install-TypeScript")
     .IsDependentOn("Install-Vsce")
     .IsDependentOn("Clean")
+    .Does(() =>
 {
     var buildResultDir = MakeAbsolute(BuildParameters.Paths.Directories.Build);
     var packageFile = File(BuildParameters.Title + "-" + BuildParameters.Version.SemVersion + ".vsix");
@@ -171,7 +172,7 @@ BuildParameters.Tasks.PackageExtensionTask = Task("Package-Extension")
     VscePackage(new VscePackageSettings() {
         OutputFilePath = buildResultDir + packageFile
     });
-})
+});
 
 BuildParameters.Tasks.PublishExtensionTask = Task("Publish-Extension")
     .IsDependentOn("Package-Extension")

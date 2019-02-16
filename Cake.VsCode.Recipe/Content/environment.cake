@@ -56,6 +56,6 @@ public static class Environment
         WyamAccessTokenVariable = wyamAccessTokenVariable ?? "WYAM_ACCESS_TOKEN";
         WyamDeployRemoteVariable = wyamDeployRemoteVariable ?? "WYAM_DEPLOY_REMOTE";
         WyamDeployBranchVariable = wyamDeployBranchVariable ?? "WYAM_DEPLOY_BRANCH";
-        MarketplaceTokenVariable = marketplaceTokenVariable ?? "VSMARKETPLACE_TOKEN"
+        MarketplaceTokenVariable = marketplaceTokenVariable ?? "VSMARKETPLACE_TOKEN";
     }
 }

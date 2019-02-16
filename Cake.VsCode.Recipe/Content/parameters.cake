@@ -99,6 +99,7 @@ public static class BuildParameters
     public static MarketplaceCredentials Marketplace { get; private set; }
     public static BuildVersion Version { get; private set; }
     public static BuildPaths Paths { get; private set; }
+    public static BuildTasks Tasks { get; set; }
     public static DirectoryPath RootDirectoryPath { get; private set; }
     public static string Title { get; private set; }
     public static string RepositoryOwner { get; private set; }
@@ -409,7 +410,7 @@ public static class BuildParameters
 
         ShouldPublishExtension = (!IsLocalBuild &&
                                 !IsPullRequest &&
-                                IsMasterRepo &&
+                                IsMainRepository &&
                                 IsMasterBranch &&
                                 IsTagged &&
                                 shouldPublishExtension);

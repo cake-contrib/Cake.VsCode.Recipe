@@ -54,7 +54,7 @@ public class BuildFiles
 
     public BuildFiles(
         ICakeContext context,
-        FilePath[] repoFilesPaths,
+        FilePath[] repoFilesPaths
         )
     {
         RepoFilesPaths = Filter(context, repoFilesPaths);
@@ -102,8 +102,7 @@ public class BuildDirectories
 
         ToClean = new[] {
             Build,
-            TempBuild,
-            TestResults,
+            TempBuild
         };
     }
 }

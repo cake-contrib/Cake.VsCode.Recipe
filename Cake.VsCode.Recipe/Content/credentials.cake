@@ -167,5 +167,5 @@ public static MarketplaceCredentials GetMarketplaceCredentials(ICakeContext cont
 {
     return new MarketplaceCredentials(
         context.EnvironmentVariable(Environment.MarketplaceTokenVariable)
-    )
+    );
 }

@@ -28,4 +28,5 @@ public class BuildTasks
     public CakeTaskBuilder InstallVsceTask { get; set; }
     public CakeTaskBuilder UpdateProjectJsonVersionTask { get; set; }
     public CakeTaskBuilder PackageExtensionTask { get; set; }
+    public CakeTaskBuilder PublishExtensionTask { get; set; }
 }
