@@ -177,12 +177,12 @@ BuildParameters.Tasks.PublishExtensionTask = Task("Publish-Extension")
     .WithCriteria(() => BuildParameters.ShouldPublishExtension)
     .Does(() =>
 {
-    var buildResultDir = MakeAbsolute(BuildParameters.Paths.Directories.Build);
-    var packageFile = File(BuildParameters.Title + "-" + BuildParameters.Version.SemVersion + ".vsix");
+    var buildResultDir = BuildParameters.Paths.Directories.Build;
+    var packageFile = new FilePath(BuildParameters.Title + "-" + BuildParameters.Version.SemVersion + ".vsix");
 
     VscePublish(new VscePublishSettings(){
         PersonalAccessToken = BuildParameters.Marketplace.Token,
-        Package = buildResultDir + packageFile
+        Package = buildResultDir.CombineWithFilePath(packageFile)
     });
 })
 .OnError(exception =>
