@@ -43,8 +43,8 @@ BuildParameters.Tasks.UploadAppVeyorArtifactsTask = Task("Upload-AppVeyor-Artifa
 {
     // Concatenating FilePathCollections should make sure we get unique FilePaths
     foreach(var package in GetFiles(BuildParameters.Paths.Directories.Packages + "/**/*") +
-                           GetFiles(BuildParameters.Paths.Directories.ChocolateyPackages + "/*")) +
-                           GetFiles(BuildParameters.Paths.Directories.Build + "/*.vsix")
+                           GetFiles(BuildParameters.Paths.Directories.ChocolateyPackages + "/*") +
+                           GetFiles(BuildParameters.Paths.Directories.Build + "/*.vsix"))
     {
         AppVeyor.UploadArtifact(package);
     }
