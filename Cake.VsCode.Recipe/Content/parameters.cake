@@ -27,7 +27,7 @@ public static class BuildParameters
     public static string DevelopBranchName { get; private set; }
     public static string TypeScriptVersionNumber { get; private set; }
     public static string VsceVersionNumber { get; private set; }
-    public static string MarketplacePublisher { get: private set; }
+    public static string MarketplacePublisher { get; private set; }
     public static string ChocolateyPackagingFolderName { get; private set; }
 
     public static string GitterMessage

@@ -138,7 +138,7 @@ BuildParameters.Tasks.InstallVsceTask = Task("Install-Vsce")
 {
     var settings = new NpmInstallSettings();
     settings.Global = true;
-    settings.AddPackage("vsce", BuildParameters.VsceVesionNumber);
+    settings.AddPackage("vsce", BuildParameters.VsceVersionNumber);
     settings.LogLevel = NpmLogLevel.Silent;
     NpmInstall(settings);
 });
