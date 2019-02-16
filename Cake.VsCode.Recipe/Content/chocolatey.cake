@@ -12,12 +12,13 @@ BuildParameters.Tasks.CreateChocolateyPackageTask = Task("Create-Chocolatey-Pack
     EnsureDirectoryExists(BuildParameters.Paths.Directories.ChocolateyPackages);
     var buildResultDir = BuildParameters.Paths.Directories.Build;
     var packageFile = new FilePath(BuildParameters.Title + "-" + BuildParameters.Version.SemVersion + ".vsix");
+
     CopyFile("LICENSE", "./chocolatey/tools/LICENSE.txt");
     var files = GetFiles("./chocolatey/tools/**/*").Select(f => new ChocolateyNuSpecContent {
                   Source = MakeAbsolute((FilePath)f).ToString(),
                   Target = "tools"
                 }).ToList();
-    files.Add(new ChocolateyNuSpecContent { Source = buildResultDir.CombineWithFilePath(packageFile).FullPath, Target = "tools/" + BuildParameters.Title + ".vsix" });
+    files.Add(new ChocolateyNuSpecContent { Source = MakeAbsolute(buildResultDir.CombineWithFilePath(packageFile)).ToString(), Target = "tools/" + BuildParameters.Title + ".vsix" });
 
     ChocolateyPack(nuspecFile, new ChocolateyPackSettings {
         Version = BuildParameters.Version.SemVersion,
@@ -27,7 +28,7 @@ BuildParameters.Tasks.CreateChocolateyPackageTask = Task("Create-Chocolatey-Pack
     });
 });
 
-BuildParameters.Tasks.PublishChocolateyPackageTask = Task("Publish-Chocolatey-Packages")
+BuildParameters.Tasks.PublishChocolateyPackageTask = Task("Publish-Chocolatey-Package")
     .IsDependentOn("Create-Chocolatey-Package")
     .WithCriteria(() => BuildParameters.IsRunningOnWindows)
     .WithCriteria(() => BuildParameters.ShouldPublishChocolatey)
@@ -55,6 +56,6 @@ BuildParameters.Tasks.PublishChocolateyPackageTask = Task("Publish-Chocolatey-Pa
 .OnError(exception =>
 {
     Error(exception.Message);
-    Information("Publish-Chocolatey-Packages Task failed, but continuing with next Task...");
+    Information("Publish-Chocolatey-Package Task failed, but continuing with next Task...");
     publishingError = true;
 });

@@ -200,7 +200,7 @@ BuildParameters.Tasks.AppVeyorTask = Task("AppVeyor")
     .IsDependentOn("Upload-AppVeyor-Artifacts")
     .IsDependentOn("Publish-GitHub-Release")
     .IsDependentOn("Publish-Extension")
-    .IsDependentOn("Publish-Chocolatey-Packages")
+    .IsDependentOn("Publish-Chocolatey-Package")
     .IsDependentOn("Publish-Documentation")
     .Finally(() =>
 {
