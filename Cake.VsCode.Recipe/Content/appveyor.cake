@@ -36,6 +36,7 @@ BuildParameters.Tasks.PrintAppVeyorEnvironmentVariablesTask = Task("Print-AppVey
 
 BuildParameters.Tasks.UploadAppVeyorArtifactsTask = Task("Upload-AppVeyor-Artifacts")
     .IsDependentOn("Package-Extension")
+    .IsDependentOn("Create-Chocolatey-Package")
     .WithCriteria(() => BuildParameters.IsRunningOnAppVeyor)
     .WithCriteria(() => DirectoryExists(BuildParameters.Paths.Directories.ChocolateyPackages))
     .Does(() =>
