@@ -166,11 +166,11 @@ BuildParameters.Tasks.PackageExtensionTask = Task("Package-Extension")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    var buildResultDir = MakeAbsolute(BuildParameters.Paths.Directories.Build);
-    var packageFile = File(BuildParameters.Title + "-" + BuildParameters.Version.SemVersion + ".vsix");
+    var buildResultDir = BuildParameters.Paths.Directories.Build;
+    var packageFile = new FilePath(BuildParameters.Title + "-" + BuildParameters.Version.SemVersion + ".vsix");
 
     VscePackage(new VscePackageSettings() {
-        OutputFilePath = buildResultDir + packageFile
+        OutputFilePath = buildResultDir.CombineWithFilePath(packageFile)
     });
 });
 

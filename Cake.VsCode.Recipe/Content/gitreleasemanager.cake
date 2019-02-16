@@ -50,7 +50,7 @@ BuildParameters.Tasks.ExportReleaseNotesTask = Task("Export-Release-Notes")
 );
 
 BuildParameters.Tasks.PublishGitHubReleaseTask = Task("Publish-GitHub-Release")
-    .IsDependentOn("Package")
+    .IsDependentOn("Create-Chocolatey-Package")
     .WithCriteria(() => BuildParameters.ShouldPublishGitHub)
     .Does(() => RequireTool(GitReleaseManagerTool, () => {
         if(BuildParameters.CanUseGitReleaseManager)

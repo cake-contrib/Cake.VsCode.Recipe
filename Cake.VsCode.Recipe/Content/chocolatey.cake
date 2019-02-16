@@ -1,7 +1,6 @@
-BuildParameters.Tasks.CreateChocolateyPackagesTask = Task("Create-Chocolatey-Packages")
-    .IsDependentOn("Clean")
+BuildParameters.Tasks.CreateChocolateyPackageTask = Task("Create-Chocolatey-Package")
+    .IsDependentOn("Package-Extension")
     .WithCriteria(() => BuildParameters.IsRunningOnWindows)
-    .WithCriteria(() => DirectoryExists(BuildParameters.Paths.Directories.ChocolateyNuspecDirectory))
     .Does(() =>
 {
     // TODO: Automatically update the release notes in the nuspec file
@@ -27,8 +26,8 @@ BuildParameters.Tasks.CreateChocolateyPackagesTask = Task("Create-Chocolatey-Pac
     });
 });
 
-BuildParameters.Tasks.PublishChocolateyPackagesTask = Task("Publish-Chocolatey-Packages")
-    .IsDependentOn("Package")
+BuildParameters.Tasks.PublishChocolateyPackageTask = Task("Publish-Chocolatey-Packages")
+    .IsDependentOn("Create-Chocolatey-Package")
     .WithCriteria(() => BuildParameters.IsRunningOnWindows)
     .WithCriteria(() => BuildParameters.ShouldPublishChocolatey)
     .WithCriteria(() => DirectoryExists(BuildParameters.Paths.Directories.ChocolateyPackages))

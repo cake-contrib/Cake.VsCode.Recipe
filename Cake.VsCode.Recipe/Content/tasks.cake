@@ -12,8 +12,8 @@ public class BuildTasks
     public CakeTaskBuilder ClearCacheTask { get; set; }
     public CakeTaskBuilder PreviewTask { get; set; }
     public CakeTaskBuilder PublishDocsTask { get; set; }
-    public CakeTaskBuilder CreateChocolateyPackagesTask { get; set; }
-    public CakeTaskBuilder PublishChocolateyPackagesTask { get; set; }
+    public CakeTaskBuilder CreateChocolateyPackageTask { get; set; }
+    public CakeTaskBuilder PublishChocolateyPackageTask { get; set; }
     public CakeTaskBuilder CreateReleaseNotesTask { get; set; }
     public CakeTaskBuilder ExportReleaseNotesTask { get; set; }
     public CakeTaskBuilder PublishGitHubReleaseTask { get; set; }

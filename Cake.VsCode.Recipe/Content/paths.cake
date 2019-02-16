@@ -12,10 +12,7 @@ public class BuildPaths
 
         // Directories
         var buildDirectoryPath             = "./BuildArtifacts";
-        var tempBuildDirectoryPath         = buildDirectoryPath + "/temp";
         var publishedDocumentationDirectory= buildDirectoryPath + "/Documentation";
-
-        var chocolateyNuspecDirectory = "./nuspec/chocolatey";
 
         var packagesDirectory = buildDirectoryPath + "/Packages";
         var chocolateyPackagesOutputDirectory = packagesDirectory + "/Chocolatey";
@@ -28,16 +25,14 @@ public class BuildPaths
 
         var buildDirectories = new BuildDirectories(
             buildDirectoryPath,
-            tempBuildDirectoryPath,
             publishedDocumentationDirectory,
-            chocolateyNuspecDirectory,
             chocolateyPackagesOutputDirectory,
             packagesDirectory
             );
 
         var buildFiles = new BuildFiles(
             context,
-            repoFilesPaths,
+            repoFilesPaths
             );
 
         return new BuildPaths
@@ -77,32 +72,25 @@ public class BuildFiles
 public class BuildDirectories
 {
     public DirectoryPath Build { get; private set; }
-    public DirectoryPath TempBuild { get; private set; }
     public DirectoryPath PublishedDocumentation { get; private set; }
-    public DirectoryPath ChocolateyNuspecDirectory { get; private set; }
     public DirectoryPath ChocolateyPackages { get; private set; }
     public DirectoryPath Packages { get; private set; }
     public ICollection<DirectoryPath> ToClean { get; private set; }
 
     public BuildDirectories(
         DirectoryPath build,
-        DirectoryPath tempBuild,
         DirectoryPath publishedDocumentation,
-        DirectoryPath chocolateyNuspecDirectory,
         DirectoryPath chocolateyPackages,
         DirectoryPath packages
         )
     {
         Build = build;
-        TempBuild = tempBuild;
         PublishedDocumentation = publishedDocumentation;
-        ChocolateyNuspecDirectory = chocolateyNuspecDirectory;
         ChocolateyPackages = chocolateyPackages;
         Packages = packages;
 
         ToClean = new[] {
-            Build,
-            TempBuild
+            Build
         };
     }
 }
