@@ -14,7 +14,7 @@
 #addin nuget:?package=Cake.Slack&version=0.12.0
 #addin nuget:?package=Cake.Twitter&version=0.9.0
 #addin nuget:?package=Cake.VsCode&version=0.8.0
-#addin nuget:?package=Cake.Wyam&version=1.7.4
+#addin nuget:?package=Cake.Wyam&version=2.1.3
 // Needed for Cake.Graph
 #addin nuget:?package=RazorEngine&version=3.10.0&loaddependencies=true
 

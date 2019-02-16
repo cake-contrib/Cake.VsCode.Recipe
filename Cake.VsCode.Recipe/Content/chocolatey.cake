@@ -10,13 +10,14 @@ BuildParameters.Tasks.CreateChocolateyPackageTask = Task("Create-Chocolatey-Pack
     var nuspecFile = File("./chocolatey/" + BuildParameters.Title + ".nuspec");
 
     EnsureDirectoryExists(BuildParameters.Paths.Directories.ChocolateyPackages);
-    var packageFile = MakeAbsolute((FilePath)(BuildParameters.Title + "-" + BuildParameters.Version.SemVersion + ".vsix"));
+    var buildResultDir = BuildParameters.Paths.Directories.Build;
+    var packageFile = new FilePath(BuildParameters.Title + "-" + BuildParameters.Version.SemVersion + ".vsix");
     CopyFile("LICENSE", "./chocolatey/tools/LICENSE.txt");
     var files = GetFiles("./chocolatey/tools/**/*").Select(f => new ChocolateyNuSpecContent {
                   Source = MakeAbsolute((FilePath)f).ToString(),
                   Target = "tools"
                 }).ToList();
-    files.Add(new ChocolateyNuSpecContent { Source = packageFile.ToString(), Target = "tools/" + BuildParameters.Title + ".vsix" });
+    files.Add(new ChocolateyNuSpecContent { Source = buildResultDir.CombineWithFilePath(packageFile).FullPath, Target = "tools/" + BuildParameters.Title + ".vsix" });
 
     ChocolateyPack(nuspecFile, new ChocolateyPackSettings {
         Version = BuildParameters.Version.SemVersion,

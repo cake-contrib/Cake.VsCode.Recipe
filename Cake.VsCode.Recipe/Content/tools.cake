@@ -5,7 +5,7 @@
 private const string GitReleaseManagerTool = "#tool nuget:?package=GitReleaseManager&version=0.8.0";
 private const string GitVersionTool = "#tool nuget:?package=GitVersion.CommandLine&version=3.6.5";
 private const string KuduSyncTool = "#tool nuget:?package=KuduSync.NET&version=1.3.1";
-private const string WyamTool = "#tool nuget:?package=Wyam&version=1.7.4";
+private const string WyamTool = "#tool nuget:?package=Wyam&version=2.1.3";
 
 Action<string, Action> RequireTool = (tool, action) => {
     var script = MakeAbsolute(File(string.Format("./{0}.cake", Guid.NewGuid())));
