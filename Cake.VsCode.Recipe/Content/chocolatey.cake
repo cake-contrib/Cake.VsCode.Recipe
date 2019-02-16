@@ -6,15 +6,14 @@ BuildParameters.Tasks.CreateChocolateyPackageTask = Task("Create-Chocolatey-Pack
     // TODO: Automatically update the release notes in the nuspec file
     // TODO: Automatically update the description from the Readme.md file
 
-    // TODO: This should be made a parameter
-    var nuspecFile = File("./chocolatey/" + BuildParameters.Title + ".nuspec");
+    var nuspecFile = File("./" + BuildParameters.ChocolateyPackagingFolderName + "/" + BuildParameters.Title + ".nuspec");
 
     EnsureDirectoryExists(BuildParameters.Paths.Directories.ChocolateyPackages);
     var buildResultDir = BuildParameters.Paths.Directories.Build;
     var packageFile = new FilePath(BuildParameters.Title + "-" + BuildParameters.Version.SemVersion + ".vsix");
 
-    CopyFile("LICENSE", "./chocolatey/tools/LICENSE.txt");
-    var files = GetFiles("./chocolatey/tools/**/*").Select(f => new ChocolateyNuSpecContent {
+    CopyFile("LICENSE", "./" + BuildParameters.ChocolateyPackagingFolderName + "/tools/LICENSE.txt");
+    var files = GetFiles("./" + BuildParameters.ChocolateyPackagingFolderName + "/tools/**/*").Select(f => new ChocolateyNuSpecContent {
                   Source = MakeAbsolute((FilePath)f).ToString(),
                   Target = "tools"
                 }).ToList();
@@ -23,7 +22,7 @@ BuildParameters.Tasks.CreateChocolateyPackageTask = Task("Create-Chocolatey-Pack
     ChocolateyPack(nuspecFile, new ChocolateyPackSettings {
         Version = BuildParameters.Version.SemVersion,
         OutputDirectory = BuildParameters.Paths.Directories.ChocolateyPackages,
-        WorkingDirectory = "./chocolatey",
+        WorkingDirectory = "./" + BuildParameters.ChocolateyPackagingFolderName,
         Files = files.ToArray()
     });
 });

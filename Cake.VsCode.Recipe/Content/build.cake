@@ -128,8 +128,7 @@ BuildParameters.Tasks.InstallTypeScriptTask = Task("Install-TypeScript")
 {
     var settings = new NpmInstallSettings();
     settings.Global = true;
-    // TODO: This should likely become a parameter
-    settings.AddPackage("typescript", "2.9.2");
+    settings.AddPackage("typescript", BuildParameters.TypeScriptVersionNumber);
     settings.LogLevel = NpmLogLevel.Silent;
     NpmInstall(settings);
 });
@@ -139,8 +138,7 @@ BuildParameters.Tasks.InstallVsceTask = Task("Install-Vsce")
 {
     var settings = new NpmInstallSettings();
     settings.Global = true;
-    // TODO: This should likely become a parameter
-    settings.AddPackage("vsce", "1.43.0");
+    settings.AddPackage("vsce", BuildParameters.VsceVesionNumber);
     settings.LogLevel = NpmLogLevel.Silent;
     NpmInstall(settings);
 });

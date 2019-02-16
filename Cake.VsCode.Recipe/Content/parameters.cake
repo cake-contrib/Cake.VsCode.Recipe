@@ -25,6 +25,10 @@ public static class BuildParameters
     public static bool TreatWarningsAsErrors { get; set; }
     public static string MasterBranchName { get; private set; }
     public static string DevelopBranchName { get; private set; }
+    public static string TypeScriptVersionNumber { get; private set; }
+    public static string VsceVersionNumber { get; private set; }
+    public static string MarketplacePublisher { get: private set; }
+    public static string ChocolateyPackagingFolderName { get; private set; }
 
     public static string GitterMessage
     {
@@ -32,8 +36,7 @@ public static class BuildParameters
         {
             if(_gitterMessage == null)
             {
-                // TODO: Need to update this with actual URL
-                return "@/all Version " + Version.SemVersion + " of the " + Title + " VS Code Extension has just been released, https://www.nuget.org/packages/" + Title + ".";
+                return "@/all Version " + Version.SemVersion + " of the " + Title + " VS Code Extension has just been released, , https://marketplace.visualstudio.com/items?itemName=" + MarketplacePublisher + "." + Title + ".  Full release notes: https://github.com/" + RepositoryOwner + "/" + RepositoryName + "/releases/tag/" + Version.SemVersion;
             }
             else
             {
@@ -52,8 +55,7 @@ public static class BuildParameters
         {
             if(_microsoftTeamsMessage == null)
             {
-                // TODO: Need to update this with actual URL
-                return "Version " + Version.SemVersion + " of the " + Title + " VS Code Extension has just been released, https://www.nuget.org/packages/" + Title + ".";
+                return "Version " + Version.SemVersion + " of the " + Title + " VS Code Extension has just been released, , https://marketplace.visualstudio.com/items?itemName=" + MarketplacePublisher + "." + Title + ".  Full release notes: https://github.com/" + RepositoryOwner + "/" + RepositoryName + "/releases/tag/" + Version.SemVersion;
             }
             else
             {
@@ -73,8 +75,7 @@ public static class BuildParameters
         {
             if(_twitterMessage == null)
             {
-                // TODO: Need to update this with actual URL
-                return "Version " + Version.SemVersion + " of the " + Title + " @code Extension has just been released, https://www.nuget.org/packages/" + Title + ".";
+                return "Version " + Version.SemVersion + " of the " + Title + " VS Code Extension has just been released, , https://marketplace.visualstudio.com/items?itemName=" + MarketplacePublisher + "." + Title + ". @code  Full release notes: https://github.com/" + RepositoryOwner + "/" + RepositoryName + "/releases/tag/" + Version.SemVersion;
             }
             else
             {
@@ -261,6 +262,10 @@ public static class BuildParameters
         context.Information("WebHost: {0}", WebHost);
         context.Information("WebLinkRoot: {0}", WebLinkRoot);
         context.Information("WebBaseEditUrl: {0}", WebBaseEditUrl);
+        context.Information("TypeScriptVersionNumber: {0}", TypeScriptVersionNumber);
+        context.Information("VsceVersionNumber: {0}", VsceVersionNumber);
+        context.Information("MarketplacePublisher: {0}", MarketplacePublisher);
+        context.Information("ChocolateyPackagingFolderName: {0}", ChocolateyPackagingFolderName);
     }
 
     public static void SetParameters(
@@ -301,7 +306,11 @@ public static class BuildParameters
         bool isPublicRepository = true,
         bool treatWarningsAsErrors = true,
         string masterBranchName = "master",
-        string developBranchName = "develop"
+        string developBranchName = "develop",
+        string typeScriptVersionNumber = "2.9.2",
+        string vsceVersionNumber = "1.43.0",
+        string marketPlacePublisher = "gep13",
+        string chocolateyPackagingFolderName = "chocolatey"
         )
     {
         if (context == null)
@@ -349,6 +358,10 @@ public static class BuildParameters
         CakeConfiguration = context.GetConfiguration();
         MasterBranchName = masterBranchName;
         DevelopBranchName = developBranchName;
+        TypeScriptVersionNumber = typeScriptVersionNumber;
+        VsceVersionNumber = vsceVersionNumber;
+        MarketplacePublisher = marketPlacePublisher;
+        ChocolateyPackagingFolderName = chocolateyPackagingFolderName;
         IsLocalBuild = buildSystem.IsLocalBuild;
         IsRunningOnUnix = context.IsRunningOnUnix();
         IsRunningOnWindows = context.IsRunningOnWindows();

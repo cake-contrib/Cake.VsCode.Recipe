@@ -55,10 +55,10 @@ BuildParameters.Tasks.PublishGitHubReleaseTask = Task("Publish-GitHub-Release")
     .Does(() => RequireTool(GitReleaseManagerTool, () => {
         if(BuildParameters.CanUseGitReleaseManager)
         {
-            // TODO:  Need to add the generated vsix file in here as well
             // Concatenating FilePathCollections should make sure we get unique FilePaths
             foreach(var package in GetFiles(BuildParameters.Paths.Directories.Packages + "/**/*") +
-                                   GetFiles(BuildParameters.Paths.Directories.ChocolateyPackages + "/*"))
+                                   GetFiles(BuildParameters.Paths.Directories.ChocolateyPackages + "/*") +
+                                   GetFiles(BuildParameters.Paths.Directories.Build + "/*.vsix"))
             {
                 GitReleaseManagerAddAssets(BuildParameters.GitHub.UserName, BuildParameters.GitHub.Password, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName, BuildParameters.Version.Milestone, package.ToString());
             }
