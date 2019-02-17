@@ -7,7 +7,7 @@ BuildParameters.SetParameters(context: Context,
                             sourceDirectoryPath: "./src",
                             nuspecFilePath: "Cake.VsCode.Recipe/Cake.VsCode.Recipe.nuspec",
                             title: "Cake.VsCode.Recipe",
-                            repositoryOwner: "gep13",
+                            repositoryOwner: "cake-contrib",
                             repositoryName: "Cake.VsCode.Recipe",
                             appVeyorAccountName: "cakecontrib",
                             shouldRunGitVersion: true);
