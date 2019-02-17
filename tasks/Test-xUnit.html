@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/Cake.VsCode.Recipe/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/Cake.VsCode.Recipe/assets/img/favicon.ico" type="image/x-icon">
-        <title>Cake.VsCode.Recipe - Cake.VsCode.Recipe</title>
+        <title>Cake.VsCode.Recipe - Test Xunit</title>
         <link href="/Cake.VsCode.Recipe/assets/css/mermaid.css" rel="stylesheet">
         <link href="/Cake.VsCode.Recipe/assets/css/highlight.css" rel="stylesheet">
         <link href="/Cake.VsCode.Recipe/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -31,7 +31,7 @@
 
         
     </head>
-    <body class="hold-transition wyam layout-boxed layout-top-nav no-gutter">    
+    <body class="hold-transition wyam layout-boxed  ">    
         <div class="top-banner"></div>
         <div class="wrapper with-container">
             <!-- Header -->
@@ -43,6 +43,10 @@
                          
                 <nav class="navbar navbar-static-top" role="navigation">
                     <!-- Sidebar toggle button-->
+                        <a href="#" class="sidebar-toggle visible-xs-block" data-toggle="offcanvas" role="button">
+                            <span class="sr-only">Toggle side menu</span>
+                            <i class="fa fa-chevron-circle-right"></i>
+                        </a>
                                         
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
@@ -56,7 +60,7 @@
                         <ul class="nav navbar-nav">                            
                                     <li><a href="/Cake.VsCode.Recipe/docs">Documentation</a></li>
         <li><a href="/Cake.VsCode.Recipe/graph">Graph</a></li>
-        <li><a href="/Cake.VsCode.Recipe/tasks">Tasks</a></li>
+        <li class="active"><a href="/Cake.VsCode.Recipe/tasks">Tasks</a></li>
  
                         </ul>       
                     </div>
@@ -67,10 +71,10 @@
             </header>
             
             <!-- Left side column. contains the logo and sidebar -->
-            <aside class="main-sidebar hidden">
+            <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/cake-contrib/Cake.VsCode.Recipe/tree/develop/docs/input/index.cshtml"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+        <div><p><a href="https://github.com/cake-contrib/Cake.VsCode.Recipe/tree/develop/docs/input/tasks/Test-xUnit.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
     <div id="infobar-headings"></div>
 
                 </section>
@@ -80,6 +84,63 @@
 
                     <ul class="sidebar-menu">
                         
+
+                <li><a href="/Cake.VsCode.Recipe/tasks/Analyze">Analyze</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/AppVeyor">Appveyor</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Build">Build</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Clean">Clean</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Clean-Documentation">Clean Documentation</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Clear-AppVeyor-Cache">Clear Appveyor Cache</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/ClearCache">Clearcache</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Create-Chocolatey-Packages">Create Chocolatey Packages</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Create-Default-Labels">Create Default Labels</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Create-Nuget-Package">Create Nuget Package</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Create-NuGet-Packages">Create Nuget Packages</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Create-Release-Notes">Create Release Notes</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/CreateIssuesReport">Createissuesreport</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Default">Default</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Deploy-Graph-Documentation">Deploy Graph Documentation</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/DotNetCore-Build">Dotnetcore Build</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/DotNetCore-Pack">Dotnetcore Pack</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/DotNetCore-Restore">Dotnetcore Restore</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/DotNetCore-Test">Dotnetcore Test</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/DupFinder">Dupfinder</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Export-Release-Notes">Export Release Notes</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Force-Publish-Documentation">Force Publish Documentation</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Generate-Version-File">Generate Version File</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/InspectCode">Inspectcode</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Install-OpenCover">Install Opencover</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Install-ReportGenerator">Install Reportgenerator</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Install-ReportUnit">Install Reportunit</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Labels">Labels</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Package">Package</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Preview">Preview</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Preview-Documentation">Preview Documentation</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Print-AppVeyor-Environment-Variables">Print Appveyor Environment Variables</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Publish-Chocolatey-Packages">Publish Chocolatey Packages</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Publish-Documentation">Publish Documentation</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Publish-GitHub-Release">Publish Github Release</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Publish-MyGet-Packages">Publish Myget Packages</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Publish-Nuget-Packages">Publish Nuget Packages</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/PublishDocs">Publishdocs</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/ReleaseNotes">Releasenotes</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Restore">Restore</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Run-Integration-Tests">Run Integration Tests</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Show-Info">Show Info</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Test">Test</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Test-Fixie">Test Fixie</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Test-MSTest">Test Mstest</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Test-NUnit">Test Nunit</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Test-VSTest">Test Vstest</a></li>
+                <li class="selected"><a href="/Cake.VsCode.Recipe/tasks/Test-xUnit">Test Xunit</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Transifex-Pull-Translations">Transifex Pull Translations</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Transifex-Push-SourceFiles">Transifex Push Sourcefiles</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Transifex-Push-Translations">Transifex Push Translations</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Transifex-Setup">Transifex Setup</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Upload-AppVeyor-Artifacts">Upload Appveyor Artifacts</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Upload-Codecov-Report">Upload Codecov Report</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Upload-Coverage-Report">Upload Coverage Report</a></li>
+                <li><a href="/Cake.VsCode.Recipe/tasks/Upload-Coveralls-Report">Upload Coveralls Report</a></li>
 
                     </ul>
                             
@@ -93,18 +154,12 @@
 
 
 		<section class="content-header">
-			<h1>Cake.VsCode.Recipe</h1>
+			<h1>Test Xunit</h1>
 		</section>
 	<section class="content">
-		
-<div class="container">
-	<h1>What is it?</h1>
-    <p>
-        Cake.VsCode.Recipe is a set of convention based build scripts, which are delivered as a NuGet Package, which can then be consumed by Cake.
-    </p>
-    <p>
-        The thought process behind this is that I was creating the same build script for VS Code Extensions several times, with minor tweaks, which meant when something changed, I had to update it in several places.  This isn't good for a number of reasons, but mostly due to the fact that it is a lot of effort to keep those up to date when things change.  By making a NuGet package of the common tasks, with the ability to configure the different options means that Cake.VsCode.Recipe can be used on many projects, and updated in a single place.'
-    </p>
+		<div class="mermaid">
+graph TD;
+Test-xUnit-->Install-OpenCover;
 </div>
 
 	</section>

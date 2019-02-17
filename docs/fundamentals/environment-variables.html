@@ -1,22 +1,20 @@
-﻿<!DOCTYPE html>
-<html>
-    <head>
+﻿<!DOCTYPE html><html><head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <meta name="description" />
-        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="description">
+        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/Cake.VsCode.Recipe/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/Cake.VsCode.Recipe/assets/img/favicon.ico" type="image/x-icon">
-        <title>Cake.VsCode.Recipe - Cake.VsCode.Recipe</title>
+        <title>Cake.VsCode.Recipe - Environment Variables</title>
         <link href="/Cake.VsCode.Recipe/assets/css/mermaid.css" rel="stylesheet">
         <link href="/Cake.VsCode.Recipe/assets/css/highlight.css" rel="stylesheet">
-        <link href="/Cake.VsCode.Recipe/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
-        <link href="/Cake.VsCode.Recipe/assets/css/adminlte/AdminLTE.css" rel="stylesheet" />
-        <link href="/Cake.VsCode.Recipe/assets/css/theme/theme.css" rel="stylesheet" />
+        <link href="/Cake.VsCode.Recipe/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="/Cake.VsCode.Recipe/assets/css/adminlte/AdminLTE.css" rel="stylesheet">
+        <link href="/Cake.VsCode.Recipe/assets/css/theme/theme.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:400,400i,700,700i" rel="stylesheet">
         <link href="/Cake.VsCode.Recipe/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="/Cake.VsCode.Recipe/assets/css/override.css" rel="stylesheet" />
+        <link href="/Cake.VsCode.Recipe/assets/css/override.css" rel="stylesheet">
         <script src="/Cake.VsCode.Recipe/assets/js/jquery-2.2.3.min.js"></script>
         <script src="/Cake.VsCode.Recipe/assets/js/bootstrap.min.js"></script>        
         <script src="/Cake.VsCode.Recipe/assets/js/app.min.js"></script>         
@@ -31,7 +29,7 @@
 
         
     </head>
-    <body class="hold-transition wyam layout-boxed layout-top-nav no-gutter">    
+    <body class="hold-transition wyam layout-boxed  ">    
         <div class="top-banner"></div>
         <div class="wrapper with-container">
             <!-- Header -->
@@ -43,6 +41,10 @@
                          
                 <nav class="navbar navbar-static-top" role="navigation">
                     <!-- Sidebar toggle button-->
+                        <a href="#" class="sidebar-toggle visible-xs-block" data-toggle="offcanvas" role="button">
+                            <span class="sr-only">Toggle side menu</span>
+                            <i class="fa fa-chevron-circle-right"></i>
+                        </a>
                                         
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
@@ -54,7 +56,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">                            
-                                    <li><a href="/Cake.VsCode.Recipe/docs">Documentation</a></li>
+                                    <li class="active"><a href="/Cake.VsCode.Recipe/docs">Documentation</a></li>
         <li><a href="/Cake.VsCode.Recipe/graph">Graph</a></li>
         <li><a href="/Cake.VsCode.Recipe/tasks">Tasks</a></li>
  
@@ -67,11 +69,20 @@
             </header>
             
             <!-- Left side column. contains the logo and sidebar -->
-            <aside class="main-sidebar hidden">
+            <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/cake-contrib/Cake.VsCode.Recipe/tree/develop/docs/input/index.cshtml"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"></div>
+        <div><p><a href="https://github.com/cake-contrib/Cake.VsCode.Recipe/tree/develop/docs/input/docs/fundamentals/environment-variables.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
+    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#github">GitHub</a></p>
+<p><a href="#myget">MyGet</a></p>
+<p><a href="#chocolatey">Chocolatey</a></p>
+<p><a href="#gitter">Gitter</a></p>
+<p><a href="#slack">Slack</a></p>
+<p><a href="#twitter">Twitter</a></p>
+<p><a href="#appveyor">AppVeyor</a></p>
+<p><a href="#wyam">Wyam</a></p>
+<hr class="infobar-hidden">
+</div>
 
                 </section>
                 <section class="sidebar">    
@@ -80,6 +91,24 @@
 
                     <ul class="sidebar-menu">
                         
+
+                <li class="treeview active">
+                    <a href="/Cake.VsCode.Recipe/docs/fundamentals">Fundamentals</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                        
+                <li class="selected"><a href="/Cake.VsCode.Recipe/docs/fundamentals/environment-variables">Environment Variables</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="/Cake.VsCode.Recipe/docs/requirements">Requirements</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                        
+                <li><a href="/Cake.VsCode.Recipe/docs/requirements/posix">Posix</a></li>
+                <li><a href="/Cake.VsCode.Recipe/docs/requirements/windows">Windows</a></li>
+
+                    </ul>
+                </li>
 
                     </ul>
                             
@@ -93,19 +122,46 @@
 
 
 		<section class="content-header">
-			<h1>Cake.VsCode.Recipe</h1>
+			<h1>Environment Variables</h1>
 		</section>
 	<section class="content">
-		
-<div class="container">
-	<h1>What is it?</h1>
-    <p>
-        Cake.VsCode.Recipe is a set of convention based build scripts, which are delivered as a NuGet Package, which can then be consumed by Cake.
-    </p>
-    <p>
-        The thought process behind this is that I was creating the same build script for VS Code Extensions several times, with minor tweaks, which meant when something changed, I had to update it in several places.  This isn't good for a number of reasons, but mostly due to the fact that it is a lot of effort to keep those up to date when things change.  By making a NuGet package of the common tasks, with the ability to configure the different options means that Cake.VsCode.Recipe can be used on many projects, and updated in a single place.'
-    </p>
-</div>
+		<p>The various tasks within Cake.VsCode.Recipe are driven, in part, by whether the correct environment variables exist on the system where the build is executing.</p>
+<p>The following are a list of the default environment variable names that are looked for during the build.</p>
+<p><strong>NOTE:</strong> If required, the name of the environment variables can be modified to fit into your existing system/architecture.</p>
+<h1 id="github">GitHub</h1>
+<h2 id="github_username">GITHUB_USERNAME</h2>
+<p>User name of the GitHub account used to create and publish releases.</p>
+<h2 id="github_password">GITHUB_PASSWORD</h2>
+<p>Password or <a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">Personal Access Token</a> of the GitHub account used to create and publish releases.</p>
+<h1 id="myget">MyGet</h1>
+<h2 id="myget_api_key">MYGET_API_KEY</h2>
+<h2 id="myget_source">MYGET_SOURCE</h2>
+<h1 id="chocolatey">Chocolatey</h1>
+<h2 id="chocolatey_api_key">CHOCOLATEY_API_KEY</h2>
+<p>API key for Chocolatey. Used to publish Chocolatey packages.</p>
+<h2 id="chocolatey_source">CHOCOLATEY_SOURCE</h2>
+<p>Source of the Chocolatey feed. Used to publish Chocolatey packages.</p>
+<h1 id="gitter">Gitter</h1>
+<h2 id="gitter_token">GITTER_TOKEN</h2>
+<h2 id="gitter_room_id">GITTER_ROOM_ID</h2>
+<h1 id="slack">Slack</h1>
+<h2 id="slack_token">SLACK_TOKEN</h2>
+<h2 id="slack_channel">SLACK_CHANNEL</h2>
+<h1 id="twitter">Twitter</h1>
+<h2 id="twitter_consumer_key">TWITTER_CONSUMER_KEY</h2>
+<h2 id="twitter_consumer_secret">TWITTER_CONSUMER_SECRET</h2>
+<h2 id="twitter_access_token">TWITTER_ACCESS_TOKEN</h2>
+<h2 id="twitter_access_token_secret">TWITTER_ACCESS_TOKEN_SECRET</h2>
+<h1 id="appveyor">AppVeyor</h1>
+<h2 id="appveyor_api_token">APPVEYOR_API_TOKEN</h2>
+<p>API token for accessing AppVeyor. Used to <a href="../usage/cleaning-cache">clean AppVeyor build cache</a>.</p>
+<h1 id="wyam">Wyam</h1>
+<h2 id="wyam_access_token">WYAM_ACCESS_TOKEN</h2>
+<p>Access token to use to publish the Wyam documentation. Used to <a href="../usage/publishing-documentation">publish documentation</a>.</p>
+<h2 id="wyam_deploy_remote">WYAM_DEPLOY_REMOTE</h2>
+<p>URI of the remote repository where the Wyam documentation is published to. Used to <a href="../usage/publishing-documentation">publish documentation</a>.</p>
+<h2 id="wyam_deploy_branch">WYAM_DEPLOY_BRANCH</h2>
+<p>Branch into which the Wyam documentation should be published. Used to <a href="../usage/publishing-documentation">publish documentation</a>.</p>
 
 	</section>
                 
@@ -161,5 +217,5 @@
                 }, 500);
             });
         </script>
-    </body>
-</html>
+    
+</body></html>
