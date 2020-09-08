@@ -10,7 +10,8 @@ BuildParameters.SetParameters(context: Context,
                             repositoryOwner: "cake-contrib",
                             repositoryName: "Cake.VsCode.Recipe",
                             appVeyorAccountName: "cakecontrib",
-                            shouldRunGitVersion: true);
+                            shouldRunGitVersion: true,
+                            ShouldPublishMyGet: false);
 
 BuildParameters.PrintParameters(Context);
 
