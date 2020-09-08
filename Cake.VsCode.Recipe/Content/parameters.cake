@@ -36,7 +36,7 @@ public static class BuildParameters
         {
             if(_gitterMessage == null)
             {
-                return "@/all Version " + Version.SemVersion + " of the " + Title + " VS Code Extension has just been released, , https://marketplace.visualstudio.com/items?itemName=" + MarketplacePublisher + "." + Title + ".  Full release notes: https://github.com/" + RepositoryOwner + "/" + RepositoryName + "/releases/tag/" + Version.SemVersion;
+                return "@/all Version " + Version.SemVersion + " of the " + Title + " VS Code Extension has just been released, https://marketplace.visualstudio.com/items?itemName=" + MarketplacePublisher + "." + Title + ".  Full release notes: https://github.com/" + RepositoryOwner + "/" + RepositoryName + "/releases/tag/" + Version.SemVersion;
             }
             else
             {
@@ -55,7 +55,7 @@ public static class BuildParameters
         {
             if(_microsoftTeamsMessage == null)
             {
-                return "Version " + Version.SemVersion + " of the " + Title + " VS Code Extension has just been released, , https://marketplace.visualstudio.com/items?itemName=" + MarketplacePublisher + "." + Title + ".  Full release notes: https://github.com/" + RepositoryOwner + "/" + RepositoryName + "/releases/tag/" + Version.SemVersion;
+                return "Version " + Version.SemVersion + " of the " + Title + " VS Code Extension has just been released, https://marketplace.visualstudio.com/items?itemName=" + MarketplacePublisher + "." + Title + ".  Full release notes: https://github.com/" + RepositoryOwner + "/" + RepositoryName + "/releases/tag/" + Version.SemVersion;
             }
             else
             {
@@ -75,7 +75,7 @@ public static class BuildParameters
         {
             if(_twitterMessage == null)
             {
-                return "Version " + Version.SemVersion + " of the " + Title + " VS Code Extension has just been released, , https://marketplace.visualstudio.com/items?itemName=" + MarketplacePublisher + "." + Title + ". @code  Full release notes: https://github.com/" + RepositoryOwner + "/" + RepositoryName + "/releases/tag/" + Version.SemVersion;
+                return "Version " + Version.SemVersion + " of the " + Title + " VS Code Extension has just been released, https://marketplace.visualstudio.com/items?itemName=" + MarketplacePublisher + "." + Title + ". @code  Full release notes: https://github.com/" + RepositoryOwner + "/" + RepositoryName + "/releases/tag/" + Version.SemVersion;
             }
             else
             {
