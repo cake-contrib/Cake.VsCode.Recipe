@@ -19,7 +19,6 @@ public class BuildTasks
     public CakeTaskBuilder PublishGitHubReleaseTask { get; set; }
     public CakeTaskBuilder CreateDefaultLabelsTask { get; set; }
     public CakeTaskBuilder CleanDocumentationTask { get; set; }
-    public CakeTaskBuilder DeployGraphDocumentation {get; set;}
     public CakeTaskBuilder PublishDocumentationTask { get; set; }
     public CakeTaskBuilder PreviewDocumentationTask { get; set; }
     public CakeTaskBuilder ForcePublishDocumentationTask { get; set; }

@@ -1,4 +1,4 @@
-#load nuget:?package=Cake.Recipe&version=1.1.1
+#load nuget:?package=Cake.Recipe&version=2.1.0
 
 Environment.SetVariableNames();
 
@@ -9,9 +9,7 @@ BuildParameters.SetParameters(context: Context,
                             title: "Cake.VsCode.Recipe",
                             repositoryOwner: "cake-contrib",
                             repositoryName: "Cake.VsCode.Recipe",
-                            appVeyorAccountName: "cakecontrib",
-                            shouldRunGitVersion: true,
-                            shouldPublishMyGet: false);
+                            appVeyorAccountName: "cakecontrib");
 
 BuildParameters.PrintParameters(Context);
 
@@ -21,7 +19,7 @@ BuildParameters.Tasks.CleanTask
     .IsDependentOn("Generate-Version-File");
 
 Task("Generate-Version-File")
-    .Does(() => {
+    .Does<BuildVersion>((context, buildVersion) => {
         var buildMetaDataCodeGen = TransformText(@"
         public class BuildMetaData
         {
@@ -32,7 +30,7 @@ Task("Generate-Version-File")
         "%>"
         )
    .WithToken("date", DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"))
-   .WithToken("version", BuildParameters.Version.SemVersion)
+   .WithToken("version", buildVersion.SemVersion)
    .ToString();
 
     System.IO.File.WriteAllText(

@@ -3,20 +3,17 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #addin nuget:?package=MagicChunks&version=2.0.0.119
-#addin nuget:?package=Cake.Figlet&version=1.2.0
-#addin nuget:?package=Cake.Git&version=0.19.0
-#addin nuget:?package=Cake.Gitter&version=0.10.0
-#addin nuget:?package=Cake.Graph&version=0.6.0
-#addin nuget:?package=Cake.Incubator&version=3.1.0
-#addin nuget:?package=Cake.Kudu&version=0.8.0
-#addin nuget:?package=Cake.MicrosoftTeams&version=0.8.0
-#addin nuget:?package=Cake.Npm&version=0.10.0
-#addin nuget:?package=Cake.Slack&version=0.12.0
-#addin nuget:?package=Cake.Twitter&version=0.9.0
-#addin nuget:?package=Cake.VsCode&version=0.8.0
-#addin nuget:?package=Cake.Wyam&version=2.1.3
-// Needed for Cake.Graph
-#addin nuget:?package=RazorEngine&version=3.10.0&loaddependencies=true
+#addin nuget:?package=Cake.Figlet&version=1.3.1
+#addin nuget:?package=Cake.Git&version=0.22.0
+#addin nuget:?package=Cake.Gitter&version=0.11.1
+#addin nuget:?package=Cake.Incubator&version=5.1.0
+#addin nuget:?package=Cake.Kudu&version=0.11.0
+#addin nuget:?package=Cake.MicrosoftTeams&version=0.9.0
+#addin nuget:?package=Cake.Npm&version=0.17.0
+#addin nuget:?package=Cake.Slack&version=0.13.0
+#addin nuget:?package=Cake.Twitter&version=0.10.1
+#addin nuget:?package=Cake.VsCode&version=0.11.1
+#addin nuget:?package=Cake.Wyam&version=2.2.9
 
 Action<string, IDictionary<string, string>> RequireAddin = (code, envVars) => {
     var script = MakeAbsolute(File(string.Format("./{0}.cake", Guid.NewGuid())));
