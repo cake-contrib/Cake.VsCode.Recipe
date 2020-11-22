@@ -121,7 +121,6 @@ public static class BuildParameters
 
     public static bool ShouldPublishChocolatey { get; private set; }
     public static bool ShouldPublishGitHub { get; private set; }
-    public static bool ShouldDeployGraphDocumentation{get ;private set;}
     public static bool ShouldPublishExtension { get; private set; }
     public static bool ShouldGenerateDocumentation { get; private set; }
     public static bool ShouldRunGitVersion { get; private set; }
@@ -242,7 +241,6 @@ public static class BuildParameters
         context.Information("ShouldDownloadFullReleaseNotes: {0}", ShouldDownloadFullReleaseNotes);
         context.Information("ShouldDownloadMilestoneReleaseNotes: {0}", ShouldDownloadMilestoneReleaseNotes);
         context.Information("ShouldNotifyBetaReleases: {0}", ShouldNotifyBetaReleases);
-        context.Information("ShouldDeployGraphDocumentation: {0}", ShouldDeployGraphDocumentation);
         context.Information("ShouldGenerateDocumentation: {0}", ShouldGenerateDocumentation);
         context.Information("ShouldRunGitVersion: {0}", ShouldRunGitVersion);
         context.Information("IsRunningOnUnix: {0}", IsRunningOnUnix);
@@ -288,7 +286,6 @@ public static class BuildParameters
         FilePath fullReleaseNotesFilePath = null,
         bool shouldPublishChocolatey = true,
         bool shouldPublishGitHub = true,
-        bool shouldDeployGraphDocumentation = true,
         bool shouldPublishExtension = true,
         bool shouldGenerateDocumentation = true,
         bool? shouldRunGitVersion = null,
@@ -427,7 +424,5 @@ public static class BuildParameters
                                 IsMasterBranch &&
                                 IsTagged &&
                                 shouldPublishExtension);
-
-        ShouldDeployGraphDocumentation = shouldDeployGraphDocumentation;
     }
 }
