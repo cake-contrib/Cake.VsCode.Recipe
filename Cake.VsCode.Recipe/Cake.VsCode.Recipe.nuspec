@@ -4,9 +4,14 @@
     <id>Cake.VsCode.Recipe</id>
     <version>0.1.0</version>
     <authors>gep13</authors>
-    <owners>gep13</owners>
+    <owners>gep13, cake-contrib</owners>
     <description>Re-usable build script for Cake that can be used for building VSCode Extensions.</description>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/cake-contrib/Cake.VsCode.Recipe/</projectUrl>
+    <repository type="git" url="https://github.com/cake-contrib/Cake.VsCode.Recipe"/>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics@a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
-    <tags>Default Build Cake</tags>
+    <copyright>Copyright (c) Cake Contributions 2019 - Present</copyright>
+    <tags>Cake, Build, Automation, Recipe, VsCode</tags>
   </metadata>
 </package>
