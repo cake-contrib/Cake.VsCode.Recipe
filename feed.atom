@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-	<link rel="self" href="http://cake-contrib.github.io/Cake.VsCode.Recipe" />
 	<id>http://cake-contrib.github.io/Cake.VsCode.Recipe</id>
 	<title>Cake.VsCode.Recipe</title>
-	<rights>2019</rights>
-	<updated>2019-02-17T14:43:59Z</updated>
+	<link rel="self" href="http://cake-contrib.github.io/Cake.VsCode.Recipe" />
+	<rights>2020</rights>
+	<updated>2020-11-22T21:05:02Z</updated>
 </feed>
