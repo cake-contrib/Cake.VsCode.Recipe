@@ -14,7 +14,7 @@ BuildParameters.Tasks.CreateChocolateyPackageTask = Task("Create-Chocolatey-Pack
         releaseNotes = System.IO.File.ReadAllLines(BuildParameters.FullReleaseNotesFilePath.FullPath, System.Text.Encoding.UTF8);
     }
 
-    var nuspecFile = File("./" + BuildParameters.ChocolateyPackagingFolderName + "/" + BuildParameters.Title + ".nuspec");
+    var nuspecFile = File("./" + BuildParameters.ChocolateyPackagingFolderName + "/" + BuildParameters.ChocolateyPackagingPackageId + ".nuspec");
 
     EnsureDirectoryExists(BuildParameters.Paths.Directories.ChocolateyPackages);
     var buildResultDir = BuildParameters.Paths.Directories.Build;
