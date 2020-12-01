@@ -3,42 +3,49 @@ BuildParameters.Tasks.CreateChocolateyPackageTask = Task("Create-Chocolatey-Pack
     .WithCriteria(() => BuildParameters.IsRunningOnWindows)
     .Does(() =>
 {
-    // TODO: Automatically update the description from the Readme.md file
-    var releaseNotes = new string[0];
-
-    if (BuildParameters.ShouldDownloadMilestoneReleaseNotes && FileExists(BuildParameters.MilestoneReleaseNotesFilePath)) {
-        // Not completely sure if the correct directory separators will be used.
-        releaseNotes = System.IO.File.ReadAllLines(BuildParameters.MilestoneReleaseNotesFilePath.FullPath, System.Text.Encoding.UTF8);
-    }
-    else if (BuildParameters.ShouldDownloadFullReleaseNotes && FileExists(BuildParameters.FullReleaseNotesFilePath)) {
-        releaseNotes = System.IO.File.ReadAllLines(BuildParameters.FullReleaseNotesFilePath.FullPath, System.Text.Encoding.UTF8);
-    }
-
     var nuspecFile = File("./" + BuildParameters.ChocolateyPackagingFolderName + "/" + BuildParameters.ChocolateyPackagingPackageId + ".nuspec");
 
-    EnsureDirectoryExists(BuildParameters.Paths.Directories.ChocolateyPackages);
-    var buildResultDir = BuildParameters.Paths.Directories.Build;
-    var packageFile = new FilePath(BuildParameters.Title + "-" + BuildParameters.Version.SemVersion + ".vsix");
+    if (FileExists(nuspecFile))
+    {
+        // TODO: Automatically update the description from the Readme.md file
+        var releaseNotes = new string[0];
 
-    CopyFile("LICENSE", "./" + BuildParameters.ChocolateyPackagingFolderName + "/tools/LICENSE.txt");
-    var files = GetFiles("./" + BuildParameters.ChocolateyPackagingFolderName + "/tools/**/*").Select(f => new ChocolateyNuSpecContent {
-                  Source = MakeAbsolute((FilePath)f).ToString(),
-                  Target = "tools"
-                }).ToList();
-    files.Add(new ChocolateyNuSpecContent { Source = MakeAbsolute(buildResultDir.CombineWithFilePath(packageFile)).ToString(), Target = "tools/" + BuildParameters.Title + ".vsix" });
+        if (BuildParameters.ShouldDownloadMilestoneReleaseNotes && FileExists(BuildParameters.MilestoneReleaseNotesFilePath)) {
+            // Not completely sure if the correct directory separators will be used.
+            releaseNotes = System.IO.File.ReadAllLines(BuildParameters.MilestoneReleaseNotesFilePath.FullPath, System.Text.Encoding.UTF8);
+        }
+        else if (BuildParameters.ShouldDownloadFullReleaseNotes && FileExists(BuildParameters.FullReleaseNotesFilePath)) {
+            releaseNotes = System.IO.File.ReadAllLines(BuildParameters.FullReleaseNotesFilePath.FullPath, System.Text.Encoding.UTF8);
+        }
 
-    var settings = new ChocolateyPackSettings {
-        Version = BuildParameters.Version.SemVersion,
-        OutputDirectory = BuildParameters.Paths.Directories.ChocolateyPackages,
-        WorkingDirectory = "./" + BuildParameters.ChocolateyPackagingFolderName,
-        Files = files.ToArray()
-    };
+        EnsureDirectoryExists(BuildParameters.Paths.Directories.ChocolateyPackages);
+        var buildResultDir = BuildParameters.Paths.Directories.Build;
+        var packageFile = new FilePath(BuildParameters.Title + "-" + BuildParameters.Version.SemVersion + ".vsix");
 
-    if (releaseNotes.Length > 0) {
-        settings.ReleaseNotes = releaseNotes;
+        CopyFile("LICENSE", "./" + BuildParameters.ChocolateyPackagingFolderName + "/tools/LICENSE.txt");
+        var files = GetFiles("./" + BuildParameters.ChocolateyPackagingFolderName + "/tools/**/*").Select(f => new ChocolateyNuSpecContent {
+                    Source = MakeAbsolute((FilePath)f).ToString(),
+                    Target = "tools"
+                    }).ToList();
+        files.Add(new ChocolateyNuSpecContent { Source = MakeAbsolute(buildResultDir.CombineWithFilePath(packageFile)).ToString(), Target = "tools/" + BuildParameters.Title + ".vsix" });
+
+        var settings = new ChocolateyPackSettings {
+            Version = BuildParameters.Version.SemVersion,
+            OutputDirectory = BuildParameters.Paths.Directories.ChocolateyPackages,
+            WorkingDirectory = "./" + BuildParameters.ChocolateyPackagingFolderName,
+            Files = files.ToArray()
+        };
+
+        if (releaseNotes.Length > 0) {
+            settings.ReleaseNotes = releaseNotes;
+        }
+
+        ChocolateyPack(nuspecFile, settings);
     }
-
-    ChocolateyPack(nuspecFile, settings);
+    else
+    {
+        Warning("No Chocolatey nuspec file exists, so no Chocolatey package will be created");
+    }
 });
 
 BuildParameters.Tasks.PublishChocolateyPackageTask = Task("Publish-Chocolatey-Package")
