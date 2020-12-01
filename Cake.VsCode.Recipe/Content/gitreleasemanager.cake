@@ -6,7 +6,7 @@ BuildParameters.Tasks.CreateReleaseNotesTask = Task("Create-Release-Notes")
     .Does(() => RequireTool(GitReleaseManagerTool, () => {
         if(BuildParameters.CanUseGitReleaseManager)
         {
-            GitReleaseManagerCreate(BuildParameters.GitHub.UserName, BuildParameters.GitHub.Password, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName, new GitReleaseManagerCreateSettings {
+            GitReleaseManagerCreate(BuildParameters.GitHub.Token, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName, new GitReleaseManagerCreateSettings {
                 Milestone         = BuildParameters.Version.Milestone,
                 Name              = BuildParameters.Version.Milestone,
                 TargetCommitish   = BuildParameters.MasterBranchName,
@@ -32,14 +32,14 @@ BuildParameters.Tasks.ExportReleaseNotesTask = Task("Export-Release-Notes")
         {
             if(BuildParameters.ShouldDownloadMilestoneReleaseNotes)
             {
-                GitReleaseManagerExport(BuildParameters.GitHub.UserName, BuildParameters.GitHub.Password, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName, BuildParameters.MilestoneReleaseNotesFilePath, new GitReleaseManagerExportSettings {
+                GitReleaseManagerExport(BuildParameters.GitHub.Token, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName, BuildParameters.MilestoneReleaseNotesFilePath, new GitReleaseManagerExportSettings {
                     TagName         = BuildParameters.Version.Milestone
                 });
             }
 
             if(BuildParameters.ShouldDownloadFullReleaseNotes)
             {
-                GitReleaseManagerExport(BuildParameters.GitHub.UserName, BuildParameters.GitHub.Password, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName, BuildParameters.FullReleaseNotesFilePath);
+                GitReleaseManagerExport(BuildParameters.GitHub.Token, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName, BuildParameters.FullReleaseNotesFilePath);
             }
         }
         else
@@ -60,10 +60,10 @@ BuildParameters.Tasks.PublishGitHubReleaseTask = Task("Publish-GitHub-Release")
                                    GetFiles(BuildParameters.Paths.Directories.ChocolateyPackages + "/*") +
                                    GetFiles(BuildParameters.Paths.Directories.Build + "/*.vsix"))
             {
-                GitReleaseManagerAddAssets(BuildParameters.GitHub.UserName, BuildParameters.GitHub.Password, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName, BuildParameters.Version.Milestone, package.ToString());
+                GitReleaseManagerAddAssets(BuildParameters.GitHub.Token, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName, BuildParameters.Version.Milestone, package.ToString());
             }
 
-            GitReleaseManagerClose(BuildParameters.GitHub.UserName, BuildParameters.GitHub.Password, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName, BuildParameters.Version.Milestone);
+            GitReleaseManagerClose(BuildParameters.GitHub.Token, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName, BuildParameters.Version.Milestone);
         }
         else
         {
@@ -82,7 +82,7 @@ BuildParameters.Tasks.CreateDefaultLabelsTask = Task("Create-Default-Labels")
     .Does(() => RequireTool(GitReleaseManagerTool, () => {
         if(BuildParameters.CanUseGitReleaseManager)
         {
-            GitReleaseManagerLabel(BuildParameters.GitHub.UserName, BuildParameters.GitHub.Password, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName);
+            GitReleaseManagerLabel(BuildParameters.GitHub.Token, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName);
         }
         else
         {

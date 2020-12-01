@@ -3,7 +3,7 @@ BuildParameters.Tasks.CreateChocolateyPackageTask = Task("Create-Chocolatey-Pack
     .WithCriteria(() => BuildParameters.IsRunningOnWindows)
     .Does(() =>
 {
-    var nuspecFile = File("./" + BuildParameters.ChocolateyPackagingFolderName + "/" + BuildParameters.Title + ".nuspec");
+    var nuspecFile = File("./" + BuildParameters.ChocolateyPackagingFolderName + "/" + BuildParameters.ChocolateyPackagingPackageId + ".nuspec");
 
     if (FileExists(nuspecFile))
     {
