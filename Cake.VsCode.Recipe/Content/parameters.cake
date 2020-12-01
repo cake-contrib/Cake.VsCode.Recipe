@@ -29,6 +29,7 @@ public static class BuildParameters
     public static string VsceVersionNumber { get; private set; }
     public static string MarketplacePublisher { get; private set; }
     public static string ChocolateyPackagingFolderName { get; private set; }
+    public static string ChocolateyPackagingPackageId { get; private set; }
 
     public static string GitterMessage
     {
@@ -264,6 +265,7 @@ public static class BuildParameters
         context.Information("VsceVersionNumber: {0}", VsceVersionNumber);
         context.Information("MarketplacePublisher: {0}", MarketplacePublisher);
         context.Information("ChocolateyPackagingFolderName: {0}", ChocolateyPackagingFolderName);
+        context.Information("ChocolateyPackagingPackageId: {0}", ChocolateyPackagingPackageId);
     }
 
     public static void SetParameters(
@@ -307,7 +309,8 @@ public static class BuildParameters
         string typeScriptVersionNumber = "2.9.2",
         string vsceVersionNumber = "1.43.0",
         string marketPlacePublisher = "gep13",
-        string chocolateyPackagingFolderName = "chocolatey"
+        string chocolateyPackagingFolderName = "chocolatey",
+        string chocolateyPackagingPackageId = null
         )
     {
         if (context == null)
@@ -359,6 +362,7 @@ public static class BuildParameters
         VsceVersionNumber = vsceVersionNumber;
         MarketplacePublisher = marketPlacePublisher;
         ChocolateyPackagingFolderName = chocolateyPackagingFolderName;
+        ChocolateyPackagingPackageId = chocolateyPackagingPackageId ?? title;
         IsLocalBuild = buildSystem.IsLocalBuild;
         IsRunningOnUnix = context.IsRunningOnUnix();
         IsRunningOnWindows = context.IsRunningOnWindows();
