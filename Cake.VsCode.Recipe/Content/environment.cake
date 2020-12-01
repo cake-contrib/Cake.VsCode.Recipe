@@ -1,7 +1,6 @@
 public static class Environment
 {
-    public static string GithubUserNameVariable { get; private set; }
-    public static string GithubPasswordVariable { get; private set; }
+    public static string GithubTokenVariable { get; private set; }
     public static string ChocolateyApiKeyVariable { get; private set; }
     public static string ChocolateySourceUrlVariable { get; private set; }
     public static string GitterTokenVariable { get; private set; }
@@ -20,8 +19,7 @@ public static class Environment
     public static string MarketplaceTokenVariable { get; private set; }
 
     public static void SetVariableNames(
-        string githubUserNameVariable = null,
-        string githubPasswordVariable = null,
+        string githubTokenVariable = null,
         string chocolateyApiKeyVariable = null,
         string chocolateySourceUrlVariable = null,
         string gitterTokenVariable = null,
@@ -39,8 +37,7 @@ public static class Environment
         string wyamDeployBranchVariable = null,
         string marketplaceTokenVariable = null)
     {
-        GithubUserNameVariable = githubUserNameVariable ?? "GITHUB_USERNAME";
-        GithubPasswordVariable = githubPasswordVariable ?? "GITHUB_PASSWORD";
+        GithubTokenVariable = githubTokenVariable ?? "GITHUB_PAT";
         ChocolateyApiKeyVariable = chocolateyApiKeyVariable ?? "CHOCOLATEY_API_KEY";
         ChocolateySourceUrlVariable = chocolateySourceUrlVariable ?? "CHOCOLATEY_SOURCE";
         GitterTokenVariable = gitterTokenVariable ?? "GITTER_TOKEN";

@@ -1,12 +1,10 @@
 public class GitHubCredentials
 {
-    public string UserName { get; private set; }
-    public string Password { get; private set; }
+    public string Token { get; private set; }
 
-    public GitHubCredentials(string userName, string password)
+    public GitHubCredentials(string token)
     {
-        UserName = userName;
-        Password = password;
+        Token = token;
     }
 }
 
@@ -109,8 +107,7 @@ public class MarketplaceCredentials
 public static GitHubCredentials GetGitHubCredentials(ICakeContext context)
 {
     return new GitHubCredentials(
-        context.EnvironmentVariable(Environment.GithubUserNameVariable),
-        context.EnvironmentVariable(Environment.GithubPasswordVariable));
+        context.EnvironmentVariable(Environment.GithubTokenVariable));
 }
 
 public static MicrosoftTeamsCredentials GetMicrosoftTeamsCredentials(ICakeContext context)
