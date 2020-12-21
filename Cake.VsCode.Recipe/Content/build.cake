@@ -118,9 +118,18 @@ BuildParameters.Tasks.CleanTask = Task("Clean")
 BuildParameters.Tasks.NpmInstallTask = Task("Npm-Install")
     .Does(() =>
 {
-    var settings = new NpmInstallSettings();
-    settings.LogLevel = NpmLogLevel.Silent;
-    NpmInstall(settings);
+    if(BuildParameters.IsLocalBuild) 
+    {
+        var settings = new NpmInstallSettings();
+        settings.LogLevel = NpmLogLevel.Silent;
+        NpmInstall(settings);
+    } 
+    else 
+    {
+        var settings = new NpmCiSettings();
+        settings.LogLevel = NpmLogLevel.Silent;
+        NpmCi(settings);
+    }
 });
 
 BuildParameters.Tasks.InstallTypeScriptTask = Task("Install-TypeScript")
