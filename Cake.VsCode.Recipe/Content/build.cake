@@ -165,6 +165,7 @@ BuildParameters.Tasks.UpdateProjectJsonVersionTask = Task("Update-Project-Json-V
 });
 
 BuildParameters.Tasks.PackageExtensionTask = Task("Package-Extension")
+    .IsDependentOn("Depcheck")
     .IsDependentOn("Export-Release-Notes")
     .IsDependentOn("Update-Project-Json-Version")
     .IsDependentOn("Npm-Install")
@@ -214,6 +215,40 @@ BuildParameters.Tasks.AppVeyorTask = Task("AppVeyor")
     if(publishingError)
     {
         throw new Exception("An error occurred during the publishing of " + BuildParameters.Title + ".  All publishing tasks have been attempted.");
+    }
+});
+
+BuildParameters.Tasks.DepcheckTask = Task("Depcheck")
+    .WithCriteria(() => BuildParameters.ShouldRunDepcheck)
+    .Does(() =>
+{
+    // install depcheck
+    var settings = new NpmInstallSettings 
+    {
+        Global = true,
+        LogLevel = NpmLogLevel.Silent
+    };
+    settings.AddPackage("depcheck");
+    NpmInstall(settings);
+
+    // run
+    var proc = "depcheck";
+    if(BuildParameters.IsRunningOnWindows) 
+    {
+        proc += ".cmd";
+    }
+
+    var ret = StartProcess(proc, BuildParameters.DepcheckArguments);
+    if(ret != 0) 
+    {
+        var errorMessage = "There are unused dependencies.";
+        if(BuildParameters.ShouldFailOnDepcheckError) 
+        {
+            Error(errorMessage);
+            throw new Exception(errorMessage);
+        }
+
+        Warning(errorMessage);
     }
 });
 

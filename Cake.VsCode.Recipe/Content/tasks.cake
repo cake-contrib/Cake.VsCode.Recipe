@@ -6,6 +6,7 @@ public class BuildTasks
     public CakeTaskBuilder ShowInfoTask { get; set; }
     public CakeTaskBuilder CleanTask { get; set; }
     public CakeTaskBuilder DefaultTask { get; set; }
+    public CakeTaskBuilder DepcheckTask { get; set; }
     public CakeTaskBuilder AppVeyorTask { get; set; }
     public CakeTaskBuilder ReleaseNotesTask { get; set; }
     public CakeTaskBuilder LabelsTask { get; set; }

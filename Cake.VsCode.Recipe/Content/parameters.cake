@@ -135,6 +135,10 @@ public static class BuildParameters
     public static string WebLinkRoot { get; private set; }
     public static string WebBaseEditUrl { get; private set; }
 
+    public static bool ShouldRunDepcheck { get; private set; }
+    public static bool ShouldFailOnDepcheckError { get; private set; }
+    public static string DepcheckArguments { get; private set; }
+
     public static IBuildProvider BuildProvider { get; private set; }
 
     static BuildParameters()
@@ -265,6 +269,10 @@ public static class BuildParameters
         context.Information("MarketplacePublisher: {0}", MarketplacePublisher);
         context.Information("ChocolateyPackagingFolderName: {0}", ChocolateyPackagingFolderName);
         context.Information("ChocolateyPackagingPackageId: {0}", ChocolateyPackagingPackageId);
+
+        context.Information("ShouldRunDepcheck: {0}", ShouldRunDepcheck);
+        context.Information("ShouldFailOnDepcheckError: {0}", ShouldFailOnDepcheckError);
+        context.Information("DepcheckArguments: {0}", DepcheckArguments);
     }
 
     public static void SetParameters(
@@ -309,7 +317,10 @@ public static class BuildParameters
         string vsceVersionNumber = "1.43.0",
         string marketPlacePublisher = "gep13",
         string chocolateyPackagingFolderName = "chocolatey",
-        string chocolateyPackagingPackageId = null
+        string chocolateyPackagingPackageId = null,
+        bool shouldRunDepcheck = true,
+        bool shouldFailOnDepcheckError = true,
+        string depcheckArguments = null
         )
     {
         if (context == null)
@@ -378,6 +389,10 @@ public static class BuildParameters
             !string.IsNullOrWhiteSpace(BuildProvider.Repository.Tag.Name)
         );
         TreatWarningsAsErrors = treatWarningsAsErrors;
+        ShouldRunDepcheck = shouldRunDepcheck;
+        ShouldFailOnDepcheckError = shouldFailOnDepcheckError;
+        DepcheckArguments = depcheckArguments ?? "";
+
         GitHub = GetGitHubCredentials(context);
         MicrosoftTeams = GetMicrosoftTeamsCredentials(context);
         Gitter = GetGitterCredentials(context);
