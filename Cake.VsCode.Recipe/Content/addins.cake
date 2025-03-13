@@ -5,7 +5,6 @@
 #addin nuget:?package=MagicChunks&version=2.0.0.119
 #addin nuget:?package=Cake.Figlet&version=1.3.1
 #addin nuget:?package=Cake.Git&version=0.22.0
-#addin nuget:?package=Cake.Gitter&version=0.11.1
 #addin nuget:?package=Cake.Incubator&version=5.1.0
 #addin nuget:?package=Cake.Kudu&version=0.11.0
 #addin nuget:?package=Cake.MicrosoftTeams&version=0.9.0

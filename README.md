@@ -25,10 +25,6 @@ More about Cake at http://cakebuild.net
 
 ## Chat Room
 
-Come join in the conversation about Cake Recipe in our Gitter Chat Room
-
-[![Join the chat at https://gitter.im/gep13-oss/community](https://badges.gitter.im/gep13-oss/community.svg)](https://gitter.im/gep13-oss/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 ## Build
 
 To build this package we are using Cake.

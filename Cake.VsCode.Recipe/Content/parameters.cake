@@ -1,6 +1,5 @@
 public static class BuildParameters
 {
-    private static string _gitterMessage;
     private static string _microsoftTeamsMessage;
     private static string _twitterMessage;
 
@@ -30,25 +29,6 @@ public static class BuildParameters
     public static string MarketplacePublisher { get; private set; }
     public static string ChocolateyPackagingFolderName { get; private set; }
     public static string ChocolateyPackagingPackageId { get; private set; }
-
-    public static string GitterMessage
-    {
-        get
-        {
-            if(_gitterMessage == null)
-            {
-                return "@/all Version " + Version.SemVersion + " of the " + Title + " VS Code Extension has just been released, https://marketplace.visualstudio.com/items?itemName=" + MarketplacePublisher + "." + Title + ".  Full release notes: https://github.com/" + RepositoryOwner + "/" + RepositoryName + "/releases/tag/" + Version.SemVersion;
-            }
-            else
-            {
-                return _gitterMessage;
-            }
-        }
-
-        set {
-            _gitterMessage = value;
-        }
-    }
 
     public static string MicrosoftTeamsMessage
     {
@@ -92,7 +72,6 @@ public static class BuildParameters
 
     public static GitHubCredentials GitHub { get; private set; }
     public static MicrosoftTeamsCredentials MicrosoftTeams { get; private set; }
-    public static GitterCredentials Gitter { get; private set; }
     public static SlackCredentials Slack { get; private set; }
     public static TwitterCredentials Twitter { get; private set; }
     public static ChocolateyCredentials Chocolatey { get; private set; }
@@ -109,7 +88,6 @@ public static class BuildParameters
     public static string AppVeyorAccountName { get; private set; }
     public static string AppVeyorProjectSlug { get; private set; }
 
-    public static bool ShouldPostToGitter { get; private set; }
     public static bool ShouldPostToSlack { get; private set; }
     public static bool ShouldPostToTwitter { get; private set; }
     public static bool ShouldPostToMicrosoftTeams { get; private set; }
@@ -147,15 +125,6 @@ public static class BuildParameters
         get
         {
             return !string.IsNullOrEmpty(BuildParameters.GitHub.Token);
-        }
-    }
-
-    public static bool CanPostToGitter
-    {
-        get
-        {
-            return !string.IsNullOrEmpty(BuildParameters.Gitter.Token) &&
-                !string.IsNullOrEmpty(BuildParameters.Gitter.RoomId);
         }
     }
 
@@ -234,7 +203,6 @@ public static class BuildParameters
         context.Information("IsReleaseBranch: {0}", IsReleaseBranch);
         context.Information("IsHotFixBranch: {0}", IsHotFixBranch);
         context.Information("TreatWarningsAsErrors: {0}", TreatWarningsAsErrors);
-        context.Information("ShouldPostToGitter: {0}", ShouldPostToGitter);
         context.Information("ShouldPostToSlack: {0}", ShouldPostToSlack);
         context.Information("ShouldPostToTwitter: {0}", ShouldPostToTwitter);
         context.Information("ShouldPostToMicrosoftTeams: {0}", ShouldPostToMicrosoftTeams);
@@ -276,7 +244,6 @@ public static class BuildParameters
         string repositoryName = null,
         string appVeyorAccountName = null,
         string appVeyorProjectSlug = null,
-        bool shouldPostToGitter = true,
         bool shouldPostToSlack = true,
         bool shouldPostToTwitter = true,
         bool shouldPostToMicrosoftTeams = false,
@@ -290,7 +257,6 @@ public static class BuildParameters
         bool shouldPublishExtension = true,
         bool shouldGenerateDocumentation = true,
         bool? shouldRunGitVersion = null,
-        string gitterMessage = null,
         string microsoftTeamsMessage = null,
         string twitterMessage = null,
         DirectoryPath wyamRootDirectoryPath = null,
@@ -326,7 +292,6 @@ public static class BuildParameters
         AppVeyorAccountName = appVeyorAccountName ?? RepositoryOwner.Replace("-", "").ToLower();
         AppVeyorProjectSlug = appVeyorProjectSlug ?? Title.Replace(".", "-").ToLower();
 
-        GitterMessage = gitterMessage;
         MicrosoftTeamsMessage = microsoftTeamsMessage;
         TwitterMessage = twitterMessage;
 
@@ -339,7 +304,6 @@ public static class BuildParameters
         WebLinkRoot = webLinkRoot ?? title;
         WebBaseEditUrl = webBaseEditUrl ?? string.Format("https://github.com/{0}/{1}/tree/develop/docs/input/", repositoryOwner, title);
 
-        ShouldPostToGitter = shouldPostToGitter;
         ShouldPostToSlack = shouldPostToSlack;
         ShouldPostToTwitter = shouldPostToTwitter;
         ShouldPostToMicrosoftTeams = shouldPostToMicrosoftTeams;
@@ -380,7 +344,6 @@ public static class BuildParameters
         TreatWarningsAsErrors = treatWarningsAsErrors;
         GitHub = GetGitHubCredentials(context);
         MicrosoftTeams = GetMicrosoftTeamsCredentials(context);
-        Gitter = GetGitterCredentials(context);
         Slack = GetSlackCredentials(context);
         Twitter = GetTwitterCredentials(context);
         Chocolatey = GetChocolateyCredentials(context);

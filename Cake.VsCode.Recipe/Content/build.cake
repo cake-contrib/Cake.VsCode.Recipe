@@ -49,11 +49,6 @@ Teardown(context =>
                 SendMessageToTwitter();
             }
 
-            if(BuildParameters.CanPostToGitter && BuildParameters.ShouldPostToGitter)
-            {
-                SendMessageToGitterRoom();
-            }
-
             if(BuildParameters.CanPostToMicrosoftTeams && BuildParameters.ShouldPostToMicrosoftTeams)
             {
                 SendMessageToMicrosoftTeams();
