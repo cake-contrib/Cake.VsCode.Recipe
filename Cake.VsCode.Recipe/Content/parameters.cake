@@ -193,6 +193,11 @@ public static class BuildParameters
         }
 
         context.Information("Printing Build Parameters...");
+
+        context.Information("Target: {0}", BuildParameters.Target);
+        context.Information("Configuration: {0}", BuildParameters.Configuration);
+        context.Information("Build DirectoryPath: {0}", context.MakeAbsolute(Paths.Directories.Build));
+
         context.Information("IsLocalBuild: {0}", IsLocalBuild);
         context.Information("IsPullRequest: {0}", IsPullRequest);
         context.Information("IsMainRepository: {0}", IsMainRepository);

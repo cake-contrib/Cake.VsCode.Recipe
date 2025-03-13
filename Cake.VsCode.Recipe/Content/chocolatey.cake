@@ -41,6 +41,11 @@ BuildParameters.Tasks.CreateChocolateyPackageTask = Task("Create-Chocolatey-Pack
         }
 
         ChocolateyPack(nuspecFile, settings);
+
+        foreach (var package in GetFiles(BuildParameters.Paths.Directories.Packages + "/**/*.nupkg"))
+        {
+            BuildParameters.BuildProvider.UploadArtifact(package);
+        }
     }
     else
     {
