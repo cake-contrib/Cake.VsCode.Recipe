@@ -282,7 +282,7 @@ public static class BuildParameters
         string developBranchName = "develop",
         string typeScriptVersionNumber = "2.9.2",
         string vsceVersionNumber = "1.43.0",
-        string marketPlacePublisher = "gep13",
+        string marketPlacePublisher = null,
         string chocolateyPackagingFolderName = "chocolatey",
         string chocolateyPackagingPackageId = null,
         bool preferDotNetGlobalToolUsage = false
@@ -291,6 +291,12 @@ public static class BuildParameters
         if (context == null)
         {
             throw new ArgumentNullException("context");
+        }
+
+        if (marketPlacePublisher == null)
+        {
+            context.Error("A marketplace publisher needs to be provided. This can be provided via the SetParameters method.");
+            throw new ArgumentNullException("marketPlacePublisher");
         }
 
         BuildProvider = GetBuildProvider(context, buildSystem);
