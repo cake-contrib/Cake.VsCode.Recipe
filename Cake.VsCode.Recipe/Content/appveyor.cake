@@ -2,54 +2,6 @@
 // TASK DEFINITIONS
 ///////////////////////////////////////////////////////////////////////////////
 
-BuildParameters.Tasks.PrintAppVeyorEnvironmentVariablesTask = Task("Print-AppVeyor-Environment-Variables")
-    .WithCriteria(() => AppVeyor.IsRunningOnAppVeyor)
-    .Does(() =>
-{
-    Information("CI: {0}", EnvironmentVariable("CI"));
-    Information("APPVEYOR_API_URL: {0}", EnvironmentVariable("APPVEYOR_API_URL"));
-    Information("APPVEYOR_PROJECT_ID: {0}", EnvironmentVariable("APPVEYOR_PROJECT_ID"));
-    Information("APPVEYOR_PROJECT_NAME: {0}", EnvironmentVariable("APPVEYOR_PROJECT_NAME"));
-    Information("APPVEYOR_PROJECT_SLUG: {0}", EnvironmentVariable("APPVEYOR_PROJECT_SLUG"));
-    Information("APPVEYOR_BUILD_FOLDER: {0}", EnvironmentVariable("APPVEYOR_BUILD_FOLDER"));
-    Information("APPVEYOR_BUILD_ID: {0}", EnvironmentVariable("APPVEYOR_BUILD_ID"));
-    Information("APPVEYOR_BUILD_NUMBER: {0}", EnvironmentVariable("APPVEYOR_BUILD_NUMBER"));
-    Information("APPVEYOR_BUILD_VERSION: {0}", EnvironmentVariable("APPVEYOR_BUILD_VERSION"));
-    Information("APPVEYOR_PULL_REQUEST_NUMBER: {0}", EnvironmentVariable("APPVEYOR_PULL_REQUEST_NUMBER"));
-    Information("APPVEYOR_PULL_REQUEST_TITLE: {0}", EnvironmentVariable("APPVEYOR_PULL_REQUEST_TITLE"));
-    Information("APPVEYOR_JOB_ID: {0}", EnvironmentVariable("APPVEYOR_JOB_ID"));
-    Information("APPVEYOR_REPO_PROVIDER: {0}", EnvironmentVariable("APPVEYOR_REPO_PROVIDER"));
-    Information("APPVEYOR_REPO_SCM: {0}", EnvironmentVariable("APPVEYOR_REPO_SCM"));
-    Information("APPVEYOR_REPO_NAME: {0}", EnvironmentVariable("APPVEYOR_REPO_NAME"));
-    Information("APPVEYOR_REPO_BRANCH: {0}", EnvironmentVariable("APPVEYOR_REPO_BRANCH"));
-    Information("APPVEYOR_REPO_TAG: {0}", EnvironmentVariable("APPVEYOR_REPO_TAG"));
-    Information("APPVEYOR_REPO_TAG_NAME: {0}", EnvironmentVariable("APPVEYOR_REPO_TAG_NAME"));
-    Information("APPVEYOR_REPO_COMMIT: {0}", EnvironmentVariable("APPVEYOR_REPO_COMMIT"));
-    Information("APPVEYOR_REPO_COMMIT_AUTHOR: {0}", EnvironmentVariable("APPVEYOR_REPO_COMMIT_AUTHOR"));
-    Information("APPVEYOR_REPO_COMMIT_TIMESTAMP: {0}", EnvironmentVariable("APPVEYOR_REPO_COMMIT_TIMESTAMP"));
-    Information("APPVEYOR_SCHEDULED_BUILD: {0}", EnvironmentVariable("APPVEYOR_SCHEDULED_BUILD"));
-    Information("APPVEYOR_FORCED_BUILD: {0}", EnvironmentVariable("APPVEYOR_FORCED_BUILD"));
-    Information("APPVEYOR_RE_BUILD: {0}", EnvironmentVariable("APPVEYOR_RE_BUILD"));
-    Information("PLATFORM: {0}", EnvironmentVariable("PLATFORM"));
-    Information("CONFIGURATION: {0}", EnvironmentVariable("CONFIGURATION"));
-});
-
-BuildParameters.Tasks.UploadAppVeyorArtifactsTask = Task("Upload-AppVeyor-Artifacts")
-    .IsDependentOn("Package-Extension")
-    .IsDependentOn("Create-Chocolatey-Package")
-    .WithCriteria(() => BuildParameters.IsRunningOnAppVeyor)
-    .WithCriteria(() => DirectoryExists(BuildParameters.Paths.Directories.ChocolateyPackages))
-    .Does(() =>
-{
-    // Concatenating FilePathCollections should make sure we get unique FilePaths
-    foreach(var package in GetFiles(BuildParameters.Paths.Directories.Packages + "/**/*") +
-                           GetFiles(BuildParameters.Paths.Directories.ChocolateyPackages + "/*") +
-                           GetFiles(BuildParameters.Paths.Directories.Build + "/*.vsix"))
-    {
-        AppVeyor.UploadArtifact(package);
-    }
-});
-
 BuildParameters.Tasks.ClearAppVeyorCacheTask = Task("Clear-AppVeyor-Cache")
     .Does(() =>
         RequireAddin(@"#addin nuget:?package=Cake.AppVeyor&version=3.0.0&loaddependencies=true
@@ -109,19 +61,22 @@ public class AppVeyorBuildInfo : IBuildInfo
 {
     public AppVeyorBuildInfo(IAppVeyorProvider appVeyor)
     {
-        Number = appVeyor.Environment.Build.Number;
+        Number = appVeyor.Environment.Build.Number.ToString();
     }
 
-    public int Number { get; }
+    public string Number { get; }
 }
 
 public class AppVeyorBuildProvider : IBuildProvider
 {
-    public AppVeyorBuildProvider(IAppVeyorProvider appVeyor)
+    public AppVeyorBuildProvider(IAppVeyorProvider appVeyor, ICakeContext context)
     {
         Repository = new AppVeyorRepositoryInfo(appVeyor);
         PullRequest = new AppVeyorPullRequestInfo(appVeyor);
         Build = new AppVeyorBuildInfo(appVeyor);
+
+        _appVeyor = appVeyor;
+        _context = context;
     }
 
     public IRepositoryInfo Repository { get; }
@@ -129,4 +84,47 @@ public class AppVeyorBuildProvider : IBuildProvider
     public IPullRequestInfo PullRequest { get; }
 
     public IBuildInfo Build { get; }
+
+    public bool SupportsTokenlessCodecov { get; } = false;
+
+    public BuildProviderType Type { get; } = BuildProviderType.AppVeyor;
+
+    public IEnumerable<string> PrintVariables { get; } = new[] {
+        "CI",
+        "APPVEYOR_API_URL",
+        "APPVEYOR_PROJECT_ID",
+        "APPVEYOR_PROJECT_NAME",
+        "APPVEYOR_PROJECT_SLUG",
+        "APPVEYOR_BUILD_FOLDER",
+        "APPVEYOR_BUILD_ID",
+        "APPVEYOR_BUILD_NUMBER",
+        "APPVEYOR_BUILD_VERSION",
+        "APPVEYOR_PULL_REQUEST_NUMBER",
+        "APPVEYOR_PULL_REQUEST_TITLE",
+        "APPVEYOR_JOB_ID",
+        "APPVEYOR_REPO_PROVIDER",
+        "APPVEYOR_REPO_SCM",
+        "APPVEYOR_REPO_NAME",
+        "APPVEYOR_REPO_BRANCH",
+        "APPVEYOR_REPO_TAG",
+        "APPVEYOR_REPO_TAG_NAME",
+        "APPVEYOR_REPO_COMMIT",
+        "APPVEYOR_REPO_COMMIT_AUTHOR",
+        "APPVEYOR_REPO_COMMIT_TIMESTAMP",
+        "APPVEYOR_SCHEDULED_BUILD",
+        "APPVEYOR_FORCED_BUILD",
+        "APPVEYOR_RE_BUILD",
+        "PLATFORM",
+        "CONFIGURATION"
+    };
+
+    private readonly IAppVeyorProvider  _appVeyor;
+
+    private readonly ICakeContext _context;
+
+    public void UploadArtifact(FilePath file)
+    {
+        _context.Information("Uploading artifact from path: {0}", file.FullPath);
+        _appVeyor.UploadArtifact(file.FullPath);
+    }
 }

@@ -19,7 +19,7 @@ Setup(context =>
         context.Log.Verbosity = Verbosity.Diagnostic;
     }
 
-    RequireTool(GitVersionTool, () => {
+    RequireTool(BuildParameters.PreferDotNetGlobalToolUsage ? ToolSettings.GitVersionGlobalTool : ToolSettings.GitVersionTool, () => {
         BuildParameters.SetBuildVersion(
             BuildVersion.CalculatingSemanticVersion(
                 context: Context
@@ -47,11 +47,6 @@ Teardown(context =>
             if(BuildParameters.CanPostToTwitter && BuildParameters.ShouldPostToTwitter)
             {
                 SendMessageToTwitter();
-            }
-
-            if(BuildParameters.CanPostToGitter && BuildParameters.ShouldPostToGitter)
-            {
-                SendMessageToGitterRoom();
             }
 
             if(BuildParameters.CanPostToMicrosoftTeams && BuildParameters.ShouldPostToMicrosoftTeams)
@@ -86,28 +81,7 @@ Teardown(context =>
 // TASK DEFINITIONS
 ///////////////////////////////////////////////////////////////////////////////
 
-BuildParameters.Tasks.ShowInfoTask = Task("Show-Info")
-    .Does(() =>
-{
-    Information("Target: {0}", BuildParameters.Target);
-    Information("Configuration: {0}", BuildParameters.Configuration);
-    Information("PrepareLocalRelease: {0}", BuildParameters.PrepareLocalRelease);
-    Information("ShouldDownloadMilestoneReleaseNotes: {0}", BuildParameters.ShouldDownloadMilestoneReleaseNotes);
-    Information("ShouldDownloadFullReleaseNotes: {0}", BuildParameters.ShouldDownloadFullReleaseNotes);
-    Information("IsLocalBuild: {0}", BuildParameters.IsLocalBuild);
-    Information("IsPullRequest: {0}", BuildParameters.IsPullRequest);
-    Information("IsMainRepository: {0}", BuildParameters.IsMainRepository);
-    Information("IsMasterBranch: {0}", BuildParameters.IsMasterBranch);
-    Information("IsReleaseBranch: {0}", BuildParameters.IsReleaseBranch);
-    Information("IsHotFixBranch: {0}", BuildParameters.IsHotFixBranch);
-    Information("IsTagged: {0}", BuildParameters.IsTagged);
-
-    Information("Build DirectoryPath: {0}", MakeAbsolute(BuildParameters.Paths.Directories.Build));
-});
-
 BuildParameters.Tasks.CleanTask = Task("Clean")
-    .IsDependentOn("Show-Info")
-    .IsDependentOn("Print-AppVeyor-Environment-Variables")
     .Does(() =>
 {
     Information("Cleaning...");
@@ -118,9 +92,18 @@ BuildParameters.Tasks.CleanTask = Task("Clean")
 BuildParameters.Tasks.NpmInstallTask = Task("Npm-Install")
     .Does(() =>
 {
-    var settings = new NpmInstallSettings();
-    settings.LogLevel = NpmLogLevel.Silent;
-    NpmInstall(settings);
+    if(BuildParameters.IsLocalBuild)
+    {
+        var settings = new NpmInstallSettings();
+        settings.LogLevel = NpmLogLevel.Silent;
+        NpmInstall(settings);
+    }
+    else
+    {
+        var settings = new NpmCiSettings();
+        settings.LogLevel = NpmLogLevel.Silent;
+        NpmCi(settings);
+    }
 });
 
 BuildParameters.Tasks.InstallTypeScriptTask = Task("Install-TypeScript")
@@ -156,20 +139,25 @@ BuildParameters.Tasks.UpdateProjectJsonVersionTask = Task("Update-Project-Json-V
 });
 
 BuildParameters.Tasks.PackageExtensionTask = Task("Package-Extension")
+    .IsDependentOn("Clean")
     .IsDependentOn("Export-Release-Notes")
     .IsDependentOn("Update-Project-Json-Version")
     .IsDependentOn("Npm-Install")
     .IsDependentOn("Install-TypeScript")
     .IsDependentOn("Install-Vsce")
-    .IsDependentOn("Clean")
     .Does(() =>
 {
     var buildResultDir = BuildParameters.Paths.Directories.Build;
     var packageFile = new FilePath(BuildParameters.Title + "-" + BuildParameters.Version.SemVersion + ".vsix");
+    var outputFilePath = buildResultDir.CombineWithFilePath(packageFile);
 
     VscePackage(new VscePackageSettings() {
-        OutputFilePath = buildResultDir.CombineWithFilePath(packageFile)
+        OutputFilePath = outputFilePath
     });
+
+    if (FileExists(outputFilePath)) {
+        BuildParameters.BuildProvider.UploadArtifact(outputFilePath);
+    }
 });
 
 BuildParameters.Tasks.PublishExtensionTask = Task("Publish-Extension")
@@ -192,10 +180,10 @@ BuildParameters.Tasks.PublishExtensionTask = Task("Publish-Extension")
 });
 
 BuildParameters.Tasks.DefaultTask = Task("Default")
-    .IsDependentOn("Package-Extension");
+    .IsDependentOn("Create-Chocolatey-Package");
 
 BuildParameters.Tasks.AppVeyorTask = Task("AppVeyor")
-    .IsDependentOn("Upload-AppVeyor-Artifacts")
+    .IsDependentOn("Create-Chocolatey-Package")
     .IsDependentOn("Publish-GitHub-Release")
     .IsDependentOn("Publish-Extension")
     .IsDependentOn("Publish-Chocolatey-Package")

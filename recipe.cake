@@ -1,4 +1,4 @@
-#load nuget:?package=Cake.Recipe&version=2.1.0
+#load nuget:?package=Cake.Recipe&version=3.1.1
 
 Environment.SetVariableNames();
 
@@ -14,6 +14,9 @@ BuildParameters.SetParameters(context: Context,
 BuildParameters.PrintParameters(Context);
 
 ToolSettings.SetToolSettings(context: Context);
+
+ToolSettings.SetToolPreprocessorDirectives(gitReleaseManagerTool: "#tool nuget:?package=GitReleaseManager&version=0.19.0",
+                                           gitReleaseManagerGlobalTool: "#tool dotnet:?package=GitReleaseManager.Tool&version=0.19.0");
 
 BuildParameters.Tasks.CleanTask
     .IsDependentOn("Generate-Version-File");

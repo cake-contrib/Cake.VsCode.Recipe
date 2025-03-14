@@ -1,9 +1,11 @@
 public class BuildTasks
 {
-    public CakeTaskBuilder PrintAppVeyorEnvironmentVariablesTask { get; set; }
-    public CakeTaskBuilder UploadAppVeyorArtifactsTask { get; set; }
+    // Build Provider Tasks
+    public CakeTaskBuilder PrintCiProviderEnvironmentVariablesTask { get; set; }
+
+    // AppVeyor Tasks
     public CakeTaskBuilder ClearAppVeyorCacheTask { get; set; }
-    public CakeTaskBuilder ShowInfoTask { get; set; }
+    
     public CakeTaskBuilder CleanTask { get; set; }
     public CakeTaskBuilder DefaultTask { get; set; }
     public CakeTaskBuilder AppVeyorTask { get; set; }

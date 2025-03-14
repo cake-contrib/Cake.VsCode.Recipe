@@ -1,0 +1,1 @@
+#module nuget:?package=Cake.BuildSystems.Module&version=0.3.1

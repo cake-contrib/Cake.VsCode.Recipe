@@ -34,12 +34,6 @@ API key for Chocolatey. Used to publish Chocolatey packages.
 
 Source of the Chocolatey feed. Used to publish Chocolatey packages.
 
-# Gitter
-
-## GITTER_TOKEN
-
-## GITTER_ROOM_ID
-
 # Slack
 
 ## SLACK_TOKEN

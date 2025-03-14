@@ -18,18 +18,6 @@ public class MicrosoftTeamsCredentials
     }
 }
 
-public class GitterCredentials
-{
-    public string Token { get; private set; }
-    public string RoomId { get; private set; }
-
-    public GitterCredentials(string token, string roomId)
-    {
-        Token = token;
-        RoomId = roomId;
-    }
-}
-
 public class SlackCredentials
 {
     public string Token { get; private set; }
@@ -114,13 +102,6 @@ public static MicrosoftTeamsCredentials GetMicrosoftTeamsCredentials(ICakeContex
 {
     return new MicrosoftTeamsCredentials(
         context.EnvironmentVariable(Environment.MicrosoftTeamsWebHookUrlVariable));
-}
-
-public static GitterCredentials GetGitterCredentials(ICakeContext context)
-{
-    return new GitterCredentials(
-        context.EnvironmentVariable(Environment.GitterTokenVariable),
-        context.EnvironmentVariable(Environment.GitterRoomIdVariable));
 }
 
 public static SlackCredentials GetSlackCredentials(ICakeContext context)

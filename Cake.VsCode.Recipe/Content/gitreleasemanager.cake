@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 BuildParameters.Tasks.CreateReleaseNotesTask = Task("Create-Release-Notes")
-    .Does(() => RequireTool(GitReleaseManagerTool, () => {
+    .Does(() => RequireTool(BuildParameters.PreferDotNetGlobalToolUsage ? ToolSettings.GitReleaseManagerGlobalTool : ToolSettings.GitReleaseManagerTool, () => {
         if(BuildParameters.CanUseGitReleaseManager)
         {
             GitReleaseManagerCreate(BuildParameters.GitHub.Token, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName, new GitReleaseManagerCreateSettings {
@@ -27,7 +27,7 @@ BuildParameters.Tasks.ExportReleaseNotesTask = Task("Export-Release-Notes")
     .WithCriteria(() => BuildParameters.IsMainRepository || BuildParameters.PrepareLocalRelease)
     .WithCriteria(() => BuildParameters.IsMasterBranch || BuildParameters.IsReleaseBranch || BuildParameters.IsHotFixBranch || BuildParameters.PrepareLocalRelease)
     .WithCriteria(() => BuildParameters.IsTagged || BuildParameters.PrepareLocalRelease)
-    .Does(() => RequireTool(GitReleaseManagerTool, () => {
+    .Does(() => RequireTool(BuildParameters.PreferDotNetGlobalToolUsage ? ToolSettings.GitReleaseManagerGlobalTool : ToolSettings.GitReleaseManagerTool, () => {
         if(BuildParameters.CanUseGitReleaseManager)
         {
             if(BuildParameters.ShouldDownloadMilestoneReleaseNotes)
@@ -52,7 +52,7 @@ BuildParameters.Tasks.ExportReleaseNotesTask = Task("Export-Release-Notes")
 BuildParameters.Tasks.PublishGitHubReleaseTask = Task("Publish-GitHub-Release")
     .IsDependentOn("Create-Chocolatey-Package")
     .WithCriteria(() => BuildParameters.ShouldPublishGitHub)
-    .Does(() => RequireTool(GitReleaseManagerTool, () => {
+    .Does(() => RequireTool(BuildParameters.PreferDotNetGlobalToolUsage ? ToolSettings.GitReleaseManagerGlobalTool : ToolSettings.GitReleaseManagerTool, () => {
         if(BuildParameters.CanUseGitReleaseManager)
         {
             // Concatenating FilePathCollections should make sure we get unique FilePaths
@@ -79,7 +79,7 @@ BuildParameters.Tasks.PublishGitHubReleaseTask = Task("Publish-GitHub-Release")
 });
 
 BuildParameters.Tasks.CreateDefaultLabelsTask = Task("Create-Default-Labels")
-    .Does(() => RequireTool(GitReleaseManagerTool, () => {
+    .Does(() => RequireTool(BuildParameters.PreferDotNetGlobalToolUsage ? ToolSettings.GitReleaseManagerGlobalTool : ToolSettings.GitReleaseManagerTool, () => {
         if(BuildParameters.CanUseGitReleaseManager)
         {
             GitReleaseManagerLabel(BuildParameters.GitHub.Token, BuildParameters.RepositoryOwner, BuildParameters.RepositoryName);
