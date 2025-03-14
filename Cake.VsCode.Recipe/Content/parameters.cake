@@ -113,6 +113,8 @@ public static class BuildParameters
     public static string WebLinkRoot { get; private set; }
     public static string WebBaseEditUrl { get; private set; }
 
+    public static bool PreferDotNetGlobalToolUsage { get; private set; }
+
     public static IBuildProvider BuildProvider { get; private set; }
 
     static BuildParameters()
@@ -238,6 +240,8 @@ public static class BuildParameters
         context.Information("MarketplacePublisher: {0}", MarketplacePublisher);
         context.Information("ChocolateyPackagingFolderName: {0}", ChocolateyPackagingFolderName);
         context.Information("ChocolateyPackagingPackageId: {0}", ChocolateyPackagingPackageId);
+
+        context.Information("PreferDotNetGlobalToolUsage: {0}", PreferDotNetGlobalToolUsage);
     }
 
     public static void SetParameters(
@@ -280,7 +284,8 @@ public static class BuildParameters
         string vsceVersionNumber = "1.43.0",
         string marketPlacePublisher = "gep13",
         string chocolateyPackagingFolderName = "chocolatey",
-        string chocolateyPackagingPackageId = null
+        string chocolateyPackagingPackageId = null,
+        bool preferDotNetGlobalToolUsage = false
         )
     {
         if (context == null)
@@ -355,6 +360,9 @@ public static class BuildParameters
         AppVeyor = GetAppVeyorCredentials(context);
         Wyam = GetWyamCredentials(context);
         Marketplace = GetMarketplaceCredentials(context);
+
+        PreferDotNetGlobalToolUsage = preferDotNetGlobalToolUsage;
+
         IsPublishBuild = new [] {
             "Create-Release-Notes"
         }.Any(
