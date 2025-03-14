@@ -15,6 +15,9 @@ BuildParameters.PrintParameters(Context);
 
 ToolSettings.SetToolSettings(context: Context);
 
+ToolSettings.SetToolPreprocessorDirectives(gitReleaseManagerTool: "#tool nuget:?package=GitReleaseManager&version=0.19.0",
+                                           gitReleaseManagerGlobalTool: "#tool dotnet:?package=GitReleaseManager.Tool&version=0.19.0");
+
 BuildParameters.Tasks.CleanTask
     .IsDependentOn("Generate-Version-File");
 
